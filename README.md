@@ -12,9 +12,9 @@ This project is a beautiful, interactive, and lightweight meditation app templat
 
 ---
 
-## ✨ Template Features
+## ✨ Template services
 
-| Feature                     | Description                                                 |
+| Service                     | Description                                                 |
 | --------------------------- | ----------------------------------------------------------- |
 | 🧘 **Guided Sessions**      | Interactive timer with customizable breathing animations.   |
 | 🌬️ **Breathing Techniques** | Pre-configured 4-4-4-4 and "Purring Breath" patterns.       |

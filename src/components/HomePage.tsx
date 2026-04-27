@@ -5,6 +5,7 @@ import {
   Menu,
   X,
   PawPrint,
+  Flower,
   Users,
   BookOpen,
   Compass,
@@ -20,7 +21,7 @@ const Navigation = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      const sections = ['home', 'features', 'community', 'wisdom', 'cta'];
+      const sections = ['home', 'services', 'community', 'wisdom', 'cta'];
       let current = 'home';
 
       for (const section of sections) {
@@ -40,9 +41,9 @@ const Navigation = () => {
   }, []);
 
   const navLinks = [
-    { href: '#features', label: 'Philosophy', id: 'features' },
-    { href: '#community', label: 'Community', id: 'community' },
-    { href: '#wisdom', label: 'Wisdom', id: 'wisdom' },
+    { href: '#services', label: 'Servicios', id: 'services' },
+    { href: '#community', label: 'Portafolio', id: 'community' },
+    { href: '#wisdom', label: 'Sobre mí', id: 'wisdom' },
   ];
 
   return (
@@ -51,9 +52,9 @@ const Navigation = () => {
         href="/"
         className="text-primary flex items-center gap-3 transition-opacity hover:opacity-80"
       >
-        <PawPrint className="h-8 w-8" />
+        <Flower className="h-8 w-8" />
         <span className="font-heading text-foreground text-2xl font-bold">
-          Purrfectly Zen
+          Maria Torres MakeUp
         </span>
       </a>
 
@@ -64,11 +65,10 @@ const Navigation = () => {
             key={link.id}
             href={link.href}
             data-testid={`link-${link.id}`}
-            className={`relative w-fit transition-colors ${
-              activeSection === link.id
+            className={`relative w-fit transition-colors ${activeSection === link.id
                 ? 'text-primary font-bold'
                 : 'text-muted-foreground hover:text-primary'
-            }`}
+              }`}
           >
             <motion.div whileHover={{ scale: 1.05 }}>
               {link.label}
@@ -87,7 +87,7 @@ const Navigation = () => {
             data-testid="button-join-nav"
             className="font-heading bg-primary text-primary-foreground hover:bg-primary/90 rounded-full px-6 py-2 font-bold shadow-lg transition-all hover:scale-105 hover:shadow-xl"
           >
-            Join the Clowder
+            Reserva tu cita
           </button>
         </a>
       </div>
@@ -127,11 +127,10 @@ const Navigation = () => {
                   ease: 'easeOut',
                 }}
                 whileHover={{ x: 4 }}
-                className={`w-fit text-center text-lg font-medium transition-colors duration-300 ${
-                  activeSection === link.id
+                className={`w-fit text-center text-lg font-medium transition-colors duration-300 ${activeSection === link.id
                     ? 'text-primary font-bold'
                     : 'text-foreground hover:text-primary'
-                }`}
+                  }`}
               >
                 {link.label}
               </motion.a>
@@ -159,7 +158,7 @@ const Navigation = () => {
                     data-testid="button-join-mobile"
                     className="font-heading bg-primary text-primary-foreground hover:bg-primary/90 w-full rounded-full py-4 font-medium shadow-lg transition-all hover:shadow-xl"
                   >
-                    Join the Clowder
+                    Reserva tu cita
                   </button>
                 </motion.div>
               </a>
@@ -188,12 +187,12 @@ const Hero = () => {
           transition={{ duration: 0.6 }}
         >
           <span className="font-hand text-primary mb-4 inline-block -rotate-2 text-2xl">
-            Welcome home, human!
+            Sutil. Elegante. Tu!
           </span>
           <h1 className="font-heading text-foreground mb-6 text-5xl leading-[1.1] font-bold md:text-7xl">
-            Let's find your inner{' '}
+            Resalta tu{' '}
             <span className="text-primary relative inline-block">
-              Zen
+              Belleza
               <svg
                 className="text-accent absolute -bottom-1 left-0 -z-10 h-3 w-full"
                 viewBox="0 0 100 10"
@@ -208,11 +207,11 @@ const Hero = () => {
               </svg>
             </span>{' '}
             <br />
-            with a cat!
+            con un toque natural !
           </h1>
           <p className="text-muted-foreground max-w-md text-lg leading-relaxed md:text-xl">
-            The purrfect place to disconnect from the noise and reconnect with
-            what matters: peace, presence, and gentle purrs.
+            Maquillaje profesional para eventos, novias y sesiones especiales, 
+            diseñado para que te sientas auténtica, segura y radiante.
           </p>
 
           {/* Trust Badges */}
@@ -223,14 +222,9 @@ const Hero = () => {
             transition={{ duration: 0.6, delay: 0.3 }}
           >
             {[
-              { icon: Star, label: '5 Rated', color: 'text-yellow-600' },
-              { icon: Lock, label: '100% Free', color: 'text-green-600' },
-              {
-                icon: CheckCircle,
-                label: 'Science-Backed',
-                color: 'text-purple-600',
-              },
-              { icon: Heart, label: 'Community Loved', color: 'text-red-600' },
+              { icon: Star, label: 'Atención personalizada', color: 'text-yellow-600' },
+              { icon: Lock, label: '100% Belleza natural', color: 'text-green-600' },
+              { icon: Heart, label: 'Clientas felices', color: 'text-red-600' },
             ].map((badge, idx) => (
               <motion.div
                 key={idx}
@@ -259,7 +253,7 @@ const Hero = () => {
           className="relative z-10"
         >
           <img
-            src="/images/cute_fluffy_cat_sleeping_on_a_cloud.png"
+            src="/images/fondomtmakeup.png"
             alt="Sleeping zen cat on a cloud"
             className="h-auto w-full transform rounded-[3rem] shadow-2xl transition-transform duration-700 hover:rotate-0 md:rotate-3"
           />
@@ -274,8 +268,8 @@ const Hero = () => {
               <Sparkles size={20} />
             </div>
             <div>
-              <p className="text-sm font-bold">99% Stress Free!</p>
-              <p className="text-muted-foreground text-xs">Guaranteed purrs</p>
+              <p className="text-sm font-bold">100% Listas para brillar!</p>
+              <p className="text-muted-foreground text-xs">Resultado natural y elegante</p>
             </div>
           </motion.div>
 
@@ -294,8 +288,8 @@ const Hero = () => {
               <Users size={20} />
             </div>
             <div>
-              <p className="text-sm font-bold">500K+ Members</p>
-              <p className="text-muted-foreground text-xs">Growing community</p>
+              <p className="text-sm font-bold">50+ clientas</p>
+              <p className="text-muted-foreground text-xs">Experiencias reales</p>
             </div>
           </motion.div>
         </motion.div>
@@ -346,318 +340,318 @@ const FeatureCard = ({
   </motion.div>
 );
 
-const Features = () => {
-  return (
-    <section
-      id="features"
-      className="relative bg-white/50 px-6 py-24 md:px-12 lg:px-24"
-    >
-      <div className="mx-auto max-w-7xl">
-        <div className="mb-16 space-y-4 text-center">
-          <span className="font-hand text-primary text-xl">
-            Why cats are gurus
-          </span>
-          <h2 className="font-heading text-foreground text-4xl font-bold md:text-5xl">
-            The Way of the Meow
-          </h2>
-        </div>
+// const Services = () => {
+//   return (
+//     <section
+//       id="services"
+//       className="relative bg-white/50 px-6 py-24 md:px-12 lg:px-24"
+//     >
+//       <div className="mx-auto max-w-7xl">
+//         <div className="mb-16 space-y-4 text-center">
+//           <span className="font-hand text-primary text-xl">
+//             Why cats are gurus
+//           </span>
+//           <h2 className="font-heading text-foreground text-4xl font-bold md:text-5xl">
+//             The Way of the Meow
+//           </h2>
+//         </div>
 
-        <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
-          <FeatureCard
-            title="Master of Chill"
-            desc="Learn the ancient art of doing absolutely nothing and looking fabulous while doing it."
-            img="/images/meditating_cat_illustration.png"
-            delay={0.1}
-            testId="card-feature-chill"
-          />
-          <FeatureCard
-            title="Playful Spirit"
-            desc="Rediscover your inner kitten. Chase dreams (and butterflies) with reckless abandon."
-            img="/images/playful_cat_illustration.png"
-            delay={0.2}
-            testId="card-feature-playful"
-          />
-          <FeatureCard
-            title="Soul Nourishment"
-            desc="Feed your heart with unconditional love, head bumps, and the occasional slow blink."
-            img="/images/cat_with_food_illustration.png"
-            delay={0.3}
-            testId="card-feature-nourishment"
-          />
-        </div>
-      </div>
-    </section>
-  );
-};
+//         <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
+//           <FeatureCard
+//             title="Master of Chill"
+//             desc="Learn the ancient art of doing absolutely nothing and looking fabulous while doing it."
+//             img="/images/meditating_cat_illustration.png"
+//             delay={0.1}
+//             testId="card-feature-chill"
+//           />
+//           <FeatureCard
+//             title="Playful Spirit"
+//             desc="Rediscover your inner kitten. Chase dreams (and butterflies) with reckless abandon."
+//             img="/images/playful_cat_illustration.png"
+//             delay={0.2}
+//             testId="card-feature-playful"
+//           />
+//           <FeatureCard
+//             title="Soul Nourishment"
+//             desc="Feed your heart with unconditional love, head bumps, and the occasional slow blink."
+//             img="/images/cat_with_food_illustration.png"
+//             delay={0.3}
+//             testId="card-feature-nourishment"
+//           />
+//         </div>
+//       </div>
+//     </section>
+//   );
+// };
 
-const Community = () => {
-  const testimonials = [
-    {
-      name: 'Sarah Chen',
-      role: 'Meditation Teacher',
-      quote:
-        'Purrfectly Zen completely transformed how I view mindfulness. My cat approves too.',
-      image: '/images/sarah_chen_meditation_teacher_portrait.png',
-    },
-    {
-      name: 'Marcus Johnson',
-      role: 'Wellness Coach',
-      quote:
-        'The cat philosophy here resonates deeply. Simplicity, presence, and the power of a good nap.',
-      image: '/images/marcus_johnson_wellness_coach_portrait.png',
-    },
-    {
-      name: 'Elena Rodriguez',
-      role: 'Creative Director',
-      quote:
-        "I've never felt more zen. The community here truly understands the meow of life.",
-      image: '/images/elena_rodriguez_creative_director_portrait.png',
-    },
-  ];
+// const Community = () => {
+//   const testimonials = [
+//     {
+//       name: 'Sarah Chen',
+//       role: 'Meditation Teacher',
+//       quote:
+//         'Purrfectly Zen completely transformed how I view mindfulness. My cat approves too.',
+//       image: '/images/sarah_chen_meditation_teacher_portrait.png',
+//     },
+//     {
+//       name: 'Marcus Johnson',
+//       role: 'Wellness Coach',
+//       quote:
+//         'The cat philosophy here resonates deeply. Simplicity, presence, and the power of a good nap.',
+//       image: '/images/marcus_johnson_wellness_coach_portrait.png',
+//     },
+//     {
+//       name: 'Elena Rodriguez',
+//       role: 'Creative Director',
+//       quote:
+//         "I've never felt more zen. The community here truly understands the meow of life.",
+//       image: '/images/elena_rodriguez_creative_director_portrait.png',
+//     },
+//   ];
 
-  return (
-    <section id="community" className="relative px-6 py-24 md:px-12 lg:px-24">
-      <div className="mx-auto max-w-7xl">
-        <div className="mb-16 space-y-4 text-center">
-          <span className="font-hand text-primary text-xl">
-            Join our clowder
-          </span>
-          <h2 className="font-heading text-foreground text-4xl font-bold md:text-5xl">
-            Community Stories
-          </h2>
-        </div>
+//   return (
+//     <section id="community" className="relative px-6 py-24 md:px-12 lg:px-24">
+//       <div className="mx-auto max-w-7xl">
+//         <div className="mb-16 space-y-4 text-center">
+//           <span className="font-hand text-primary text-xl">
+//             Join our clowder
+//           </span>
+//           <h2 className="font-heading text-foreground text-4xl font-bold md:text-5xl">
+//             Community Stories
+//           </h2>
+//         </div>
 
-        <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
-          {testimonials.map((person, idx) => (
-            <motion.div
-              key={idx}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: idx * 0.1 }}
-            >
-              <div className="bg-card h-full rounded-[2rem] border-none shadow-lg transition-shadow duration-300 hover:shadow-xl">
-                <div className="flex h-full flex-col p-8">
-                  <div className="mb-6 flex items-center gap-4">
-                    <img
-                      src={person.image}
-                      alt={person.name}
-                      className="h-14 w-14 rounded-full object-cover"
-                    />
-                    <div>
-                      <p className="font-heading text-foreground font-bold">
-                        {person.name}
-                      </p>
-                      <p className="text-muted-foreground text-sm">
-                        {person.role}
-                      </p>
-                    </div>
-                  </div>
-                  <p className="text-muted-foreground flex-1 leading-relaxed italic">
-                    "{person.quote}"
-                  </p>
-                </div>
-              </div>
-            </motion.div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-};
+//         <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
+//           {testimonials.map((person, idx) => (
+//             <motion.div
+//               key={idx}
+//               initial={{ opacity: 0, y: 30 }}
+//               whileInView={{ opacity: 1, y: 0 }}
+//               viewport={{ once: true }}
+//               transition={{ duration: 0.5, delay: idx * 0.1 }}
+//             >
+//               <div className="bg-card h-full rounded-[2rem] border-none shadow-lg transition-shadow duration-300 hover:shadow-xl">
+//                 <div className="flex h-full flex-col p-8">
+//                   <div className="mb-6 flex items-center gap-4">
+//                     <img
+//                       src={person.image}
+//                       alt={person.name}
+//                       className="h-14 w-14 rounded-full object-cover"
+//                     />
+//                     <div>
+//                       <p className="font-heading text-foreground font-bold">
+//                         {person.name}
+//                       </p>
+//                       <p className="text-muted-foreground text-sm">
+//                         {person.role}
+//                       </p>
+//                     </div>
+//                   </div>
+//                   <p className="text-muted-foreground flex-1 leading-relaxed italic">
+//                     "{person.quote}"
+//                   </p>
+//                 </div>
+//               </div>
+//             </motion.div>
+//           ))}
+//         </div>
+//       </div>
+//     </section>
+//   );
+// };
 
-const QuoteSection = () => {
-  return (
-    <section
-      id="wisdom"
-      className="bg-secondary/20 flex items-center justify-center px-6 py-24 text-center"
-    >
-      <motion.div
-        className="relative max-w-3xl"
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.6 }}
-      >
-        <h3
-          data-testid="text-quote"
-          className="font-hand text-foreground/80 text-3xl leading-relaxed md:text-5xl"
-        >
-          Time spent with cats is never wasted. It is a gentle reminder that we
-          are here to be loved, and to nap.
-        </h3>
+// const QuoteSection = () => {
+//   return (
+//     <section
+//       id="wisdom"
+//       className="bg-secondary/20 flex items-center justify-center px-6 py-24 text-center"
+//     >
+//       <motion.div
+//         className="relative max-w-3xl"
+//         initial={{ opacity: 0, y: 20 }}
+//         whileInView={{ opacity: 1, y: 0 }}
+//         viewport={{ once: true }}
+//         transition={{ duration: 0.6 }}
+//       >
+//         <h3
+//           data-testid="text-quote"
+//           className="font-hand text-foreground/80 text-3xl leading-relaxed md:text-5xl"
+//         >
+//           Time spent with cats is never wasted. It is a gentle reminder that we
+//           are here to be loved, and to nap.
+//         </h3>
 
-        <div className="font-heading text-primary mt-8 font-bold">
-          — Sigmund Freud (probably)
-        </div>
-      </motion.div>
-    </section>
-  );
-};
+//         <div className="font-heading text-primary mt-8 font-bold">
+//           — Sigmund Freud (probably)
+//         </div>
+//       </motion.div>
+//     </section>
+//   );
+// };
 
-export const Footer = () => {
-  return (
-    <footer className="from-secondary/5 via-background to-primary/5 border-border/40 relative border-t bg-gradient-to-br px-6 py-16">
-      <div className="mx-auto max-w-7xl">
-        <div className="grid grid-cols-1 gap-12 md:grid-cols-3 md:gap-8 lg:gap-12">
-          {/* Left Column: Brand */}
-          <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-            className="flex flex-col justify-center space-y-3"
-          >
-            <div className="flex items-center gap-3">
-              <PawPrint className="text-primary h-7 w-7" />
-              <h3 className="font-heading text-foreground text-lg font-bold">
-                Purrfectly Zen
-              </h3>
-            </div>
-            <p className="text-muted-foreground text-sm leading-relaxed">
-              Find your zen, one breath at a time. Meditate with your inner cat
-              and discover peace within.
-            </p>
-          </motion.div>
+// export const Footer = () => {
+//   return (
+//     <footer className="from-secondary/5 via-background to-primary/5 border-border/40 relative border-t bg-gradient-to-br px-6 py-16">
+//       <div className="mx-auto max-w-7xl">
+//         <div className="grid grid-cols-1 gap-12 md:grid-cols-3 md:gap-8 lg:gap-12">
+//           {/* Left Column: Brand */}
+//           <motion.div
+//             initial={{ opacity: 0, x: -20 }}
+//             whileInView={{ opacity: 1, x: 0 }}
+//             viewport={{ once: true }}
+//             transition={{ duration: 0.5 }}
+//             className="flex flex-col justify-center space-y-3"
+//           >
+//             <div className="flex items-center gap-3">
+//               <PawPrint className="text-primary h-7 w-7" />
+//               <h3 className="font-heading text-foreground text-lg font-bold">
+//                 Maria Torres MakeUp
+//               </h3>
+//             </div>
+//             <p className="text-muted-foreground text-sm leading-relaxed">
+//               Find your zen, one breath at a time. Meditate with your inner cat
+//               and discover peace within.
+//             </p>
+//           </motion.div>
 
-          {/* Center Column: Links by Category */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.1 }}
-            className="space-y-6"
-          >
-            {/* Learn */}
-            <div className="space-y-3">
-              <div className="text-primary flex items-center gap-2">
-                <BookOpen className="h-5 w-5" />
-                <span className="font-heading text-sm font-bold">Learn</span>
-              </div>
-              <div className="flex flex-col gap-2 pl-7">
-                <a
-                  href="/guide"
-                  data-testid="link-footer-guide"
-                  className="text-muted-foreground hover:text-primary w-fit text-sm transition-colors"
-                >
-                  Getting Started
-                </a>
-                <a
-                  href="/faq"
-                  data-testid="link-footer-faq"
-                  className="text-muted-foreground hover:text-primary w-fit text-sm transition-colors"
-                >
-                  FAQ
-                </a>
-              </div>
-            </div>
+//           {/* Center Column: Links by Category */}
+//           <motion.div
+//             initial={{ opacity: 0, y: 20 }}
+//             whileInView={{ opacity: 1, y: 0 }}
+//             viewport={{ once: true }}
+//             transition={{ duration: 0.5, delay: 0.1 }}
+//             className="space-y-6"
+//           >
+//             {/* Learn */}
+//             <div className="space-y-3">
+//               <div className="text-primary flex items-center gap-2">
+//                 <BookOpen className="h-5 w-5" />
+//                 <span className="font-heading text-sm font-bold">Learn</span>
+//               </div>
+//               <div className="flex flex-col gap-2 pl-7">
+//                 <a
+//                   href="/guide"
+//                   data-testid="link-footer-guide"
+//                   className="text-muted-foreground hover:text-primary w-fit text-sm transition-colors"
+//                 >
+//                   Getting Started
+//                 </a>
+//                 <a
+//                   href="/faq"
+//                   data-testid="link-footer-faq"
+//                   className="text-muted-foreground hover:text-primary w-fit text-sm transition-colors"
+//                 >
+//                   FAQ
+//                 </a>
+//               </div>
+//             </div>
 
-            {/* Community */}
-            <div className="space-y-3">
-              <div className="text-primary flex items-center gap-2">
-                <Users className="h-5 w-5" />
-                <span className="font-heading text-sm font-bold">
-                  Community
-                </span>
-              </div>
-              <div className="flex flex-col gap-2 pl-7">
-                <a
-                  href="/contact"
-                  data-testid="link-footer-contact"
-                  className="text-muted-foreground hover:text-primary w-fit text-sm transition-colors"
-                >
-                  Contact Us
-                </a>
-                <a
-                  href="/about"
-                  data-testid="link-footer-about-community"
-                  className="text-muted-foreground hover:text-primary w-fit text-sm transition-colors"
-                >
-                  About Us
-                </a>
-              </div>
-            </div>
+//             {/* Community */}
+//             <div className="space-y-3">
+//               <div className="text-primary flex items-center gap-2">
+//                 <Users className="h-5 w-5" />
+//                 <span className="font-heading text-sm font-bold">
+//                   Community
+//                 </span>
+//               </div>
+//               <div className="flex flex-col gap-2 pl-7">
+//                 <a
+//                   href="/contact"
+//                   data-testid="link-footer-contact"
+//                   className="text-muted-foreground hover:text-primary w-fit text-sm transition-colors"
+//                 >
+//                   Contact Us
+//                 </a>
+//                 <a
+//                   href="/about"
+//                   data-testid="link-footer-about-community"
+//                   className="text-muted-foreground hover:text-primary w-fit text-sm transition-colors"
+//                 >
+//                   About Us
+//                 </a>
+//               </div>
+//             </div>
 
-            {/* Legal */}
-            <div className="space-y-3">
-              <div className="text-primary flex items-center gap-2">
-                <Lock className="h-5 w-5" />
-                <span className="font-heading text-sm font-bold">Legal</span>
-              </div>
-              <div className="flex flex-col gap-2 pl-7">
-                <a
-                  href="/privacy"
-                  data-testid="link-footer-privacy"
-                  className="text-muted-foreground hover:text-primary w-fit text-sm transition-colors"
-                >
-                  Privacy Policy
-                </a>
-              </div>
-            </div>
-          </motion.div>
+//             {/* Legal */}
+//             <div className="space-y-3">
+//               <div className="text-primary flex items-center gap-2">
+//                 <Lock className="h-5 w-5" />
+//                 <span className="font-heading text-sm font-bold">Legal</span>
+//               </div>
+//               <div className="flex flex-col gap-2 pl-7">
+//                 <a
+//                   href="/privacy"
+//                   data-testid="link-footer-privacy"
+//                   className="text-muted-foreground hover:text-primary w-fit text-sm transition-colors"
+//                 >
+//                   Privacy Policy
+//                 </a>
+//               </div>
+//             </div>
+//           </motion.div>
 
-          {/* Right Column: CTA */}
-          <motion.div
-            initial={{ opacity: 0, x: 20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            className="flex flex-col justify-center space-y-4"
-          >
-            <div className="space-y-2">
-              <h4 className="font-heading text-foreground font-bold">
-                Join Our Community
-              </h4>
-              <p className="text-muted-foreground text-sm">
-                Connect with thousands of zen-seekers on your mindfulness
-                journey.
-              </p>
-            </div>
-            <a href="/join" className="w-full">
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                data-testid="button-footer-cta"
-                className="bg-primary text-primary-foreground hover:bg-primary/90 w-full rounded-full px-6 py-3 font-bold shadow-lg transition-all hover:shadow-xl"
-              >
-                Join the Clowder
-              </motion.button>
-            </a>
-          </motion.div>
-        </div>
+//           {/* Right Column: CTA */}
+//           <motion.div
+//             initial={{ opacity: 0, x: 20 }}
+//             whileInView={{ opacity: 1, x: 0 }}
+//             viewport={{ once: true }}
+//             transition={{ duration: 0.5, delay: 0.2 }}
+//             className="flex flex-col justify-center space-y-4"
+//           >
+//             <div className="space-y-2">
+//               <h4 className="font-heading text-foreground font-bold">
+//                 Join Our Community
+//               </h4>
+//               <p className="text-muted-foreground text-sm">
+//                 Connect with thousands of zen-seekers on your mindfulness
+//                 journey.
+//               </p>
+//             </div>
+//             <a href="/join" className="w-full">
+//               <motion.button
+//                 whileHover={{ scale: 1.05 }}
+//                 whileTap={{ scale: 0.95 }}
+//                 data-testid="button-footer-cta"
+//                 className="bg-primary text-primary-foreground hover:bg-primary/90 w-full rounded-full px-6 py-3 font-bold shadow-lg transition-all hover:shadow-xl"
+//               >
+//                 Reserva tu cita
+//               </motion.button>
+//             </a>
+//           </motion.div>
+//         </div>
 
-        {/* Divider */}
-        <div className="border-border/40 my-8 border-t" />
+//         {/* Divider */}
+//         <div className="border-border/40 my-8 border-t" />
 
-        {/* Bottom: Copyright */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          className="text-muted-foreground/60 flex flex-col items-center justify-between gap-4 text-center text-xs md:flex-row"
-        >
-          <p>
-            &copy; {new Date().getFullYear()} Fauzira Alpiandi. All rights
-            reserved.
-          </p>
-          <p className="flex items-center justify-center gap-1">
-            Built with <Heart className="h-3 w-3 text-red-400" /> for cat lovers
-          </p>
-        </motion.div>
-      </div>
-    </footer>
-  );
-};
+//         {/* Bottom: Copyright */}
+//         <motion.div
+//           initial={{ opacity: 0 }}
+//           whileInView={{ opacity: 1 }}
+//           viewport={{ once: true }}
+//           className="text-muted-foreground/60 flex flex-col items-center justify-between gap-4 text-center text-xs md:flex-row"
+//         >
+//           <p>
+//             &copy; {new Date().getFullYear()} Fauzira Alpiandi. All rights
+//             reserved.
+//           </p>
+//           <p className="flex items-center justify-center gap-1">
+//             Built with <Heart className="h-3 w-3 text-red-400" /> for cat lovers
+//           </p>
+//         </motion.div>
+//       </div>
+//     </footer>
+//   );
+// };
 
 export default function Home() {
   return (
     <div className="bg-background selection:bg-primary/20 selection:text-primary-foreground min-h-screen">
       <Navigation />
       <Hero />
-      <Features />
+      {/* <Services />
       <Community />
-      <QuoteSection />
-      <section id="cta" className="px-6 py-24">
+      <QuoteSection /> */}
+      {/* <section id="cta" className="px-6 py-24">
         <div className="mx-auto max-w-6xl">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -734,8 +728,8 @@ export default function Home() {
             ))}
           </div>
         </div>
-      </section>
-      <Footer />
+      </section> */}
+      {/* <Footer /> */}
     </div>
   );
 }

@@ -1,66 +1,127 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { ArrowLeft, Mail, Heart, Users, PawPrint } from 'lucide-react';
+import {
+  ArrowLeft,
+  Calendar,
+  Clock,
+  User,
+  Phone,
+  Heart,
+  MessageCircle,
+} from 'lucide-react';
 
 const Join = () => {
-  const [email, setEmail] = useState('');
-  const [joined, setJoined] = useState(false);
+  const [selectedDate, setSelectedDate] = useState('');
+  const [selectedTime, setSelectedTime] = useState('');
+  const [service, setService] = useState('');
+  const [name, setName] = useState('');
+  const [phone, setPhone] = useState('');
+  const [notes, setNotes] = useState('');
+  const [booked, setBooked] = useState(false);
   const [error, setError] = useState('');
-  const [members, setMembers] = useState(0);
+  const [busyTimes, setBusyTimes] = useState<string[]>([]);
 
   useEffect(() => {
-    const clowderMembers = JSON.parse(
-      localStorage.getItem('clowderMembers') || '[]',
-    );
-    setMembers(clowderMembers.length);
-  }, []);
+    const fetchAvailability = async () => {
+      if (!selectedDate) return;
 
-  const handleJoin = (e: React.FormEvent) => {
+      const res = await fetch('/api/get-availability', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ date: selectedDate }),
+      });
+
+      const data = await res.json();
+
+      const busyHours = data.busy.map((slot: any) => {
+        const date = new Date(slot.start);
+        return `${String(date.getHours()).padStart(2, '0')}:00`;
+      });
+
+      setBusyTimes(busyHours);
+    };
+
+    fetchAvailability();
+  }, [selectedDate]);
+
+  const WHATSAPP_NUMBER = '573116836400';
+
+  const availableTimes = Array.from({ length: 24 }, (_, index) => {
+    return `${String(index).padStart(2, '0')}:00`;
+  });
+
+  const services = [
+    'Maquillaje social',
+    'Maquillaje para novias',
+    'Maquillaje para fotos',
+    'Maquillaje para eventos',
+    'Asesoría personalizada',
+  ];
+
+  const today = new Date().toISOString().split('T')[0];
+
+  const handleBooking = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!email) {
-      setError('Please enter your email');
-      return;
-    }
-    if (!email.includes('@')) {
-      setError('Please enter a valid email');
+
+    if (!selectedDate || !selectedTime || !service || !name || !phone) {
+      setError('Por favor completa todos los campos obligatorios.');
       return;
     }
 
-    // Save to localStorage
-    const clowderMembers = JSON.parse(
-      localStorage.getItem('clowderMembers') || '[]',
-    );
-    if (!clowderMembers.includes(email)) {
-      clowderMembers.push(email);
-      localStorage.setItem('clowderMembers', JSON.stringify(clowderMembers));
-      setMembers(clowderMembers.length);
+    const appointment = {
+      name,
+      phone,
+      service,
+      date: selectedDate,
+      time: selectedTime,
+      notes,
+      createdAt: new Date().toISOString(),
+    };
+
+
+    const response = await fetch('/api/create-calendar-event', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(appointment),
+    });
+
+    const data = await response.json();
+
+    if (response.status === 409) {
+      setError('Ese horario ya está ocupado. Por favor elige otro.');
+      return;
     }
 
-    setJoined(true);
-    setEmail('');
+    if (!response.ok) {
+      setError(data.message || 'No se pudo crear la cita en Google Calendar.');
+      return;
+    }
+
+    const message = `Hola, quiero solicitar una cita de maquillaje.%0A%0ANombre: ${name}%0AWhatsApp: ${phone}%0AServicio: ${service}%0AFecha: ${selectedDate}%0AHora: ${selectedTime}%0AMensaje adicional: ${notes || 'Sin mensaje adicional'}`;
+
+    window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${message}`, '_blank');
+
+    setBooked(true);
     setError('');
   };
 
   return (
     <div className="from-primary/10 via-background to-accent/10 flex min-h-screen flex-col bg-gradient-to-br p-6">
-      {/* Header */}
       <motion.div
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="mx-auto w-full max-w-2xl"
+        className="mx-auto w-full max-w-4xl"
       >
         <a href="/">
-          <button
-            data-testid="button-back-join"
-            className="hover:bg-secondary/20 mb-6 rounded-full p-2 transition-colors"
-          >
+          <button className="hover:bg-secondary/20 mb-6 rounded-full p-2 transition-colors">
             <ArrowLeft className="h-5 w-5" />
           </button>
         </a>
       </motion.div>
 
-      {/* Main Content */}
-      <div className="mx-auto flex w-full max-w-2xl flex-1 items-center justify-center">
+      <div className="mx-auto flex w-full max-w-4xl flex-1 items-center justify-center">
         <motion.div
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
@@ -68,227 +129,225 @@ const Join = () => {
           className="w-full"
         >
           <div className="bg-card/95 overflow-hidden rounded-[2rem] border-none shadow-2xl backdrop-blur-xl">
-            <div className="flex flex-col items-center gap-8 p-12 text-center md:p-16">
-              {!joined ? (
+            <div className="flex flex-col items-center gap-8 p-8 text-center md:p-12">
+              {!booked ? (
                 <>
-                  {/* Header */}
-                  <motion.div
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.1 }}
-                    className="space-y-4"
-                  >
+                  <div className="space-y-4">
                     <div className="flex justify-center">
                       <div className="bg-primary/20 flex h-20 w-20 items-center justify-center rounded-full">
-                        <PawPrint className="text-primary h-10 w-10" />
+                        <Calendar className="text-primary h-10 w-10" />
                       </div>
                     </div>
+
                     <h1 className="font-heading text-foreground text-4xl font-bold md:text-5xl">
-                      Join the Clowder
+                      Reserva tu cita
                     </h1>
-                    <p className="text-muted-foreground mx-auto max-w-md text-lg leading-relaxed">
-                      A clowder is a group of cats. Join our community of
-                      zen-seekers and cat lovers worldwide.
+
+                    <p className="text-muted-foreground mx-auto max-w-xl text-lg leading-relaxed">
+                      Agenda tu sesión de maquillaje profesional. Elige el
+                      servicio, fecha y horario. Cada cita tiene una duración
+                      aproximada de una hora.
                     </p>
-                  </motion.div>
+                  </div>
 
-                  {/* Benefits */}
-                  <motion.div
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.2 }}
-                    className="grid w-full grid-cols-1 gap-4 md:grid-cols-3"
-                  >
-                    <div className="space-y-2">
-                      <Mail className="text-primary mx-auto h-6 w-6" />
-                      <p className="text-foreground text-sm font-bold">
-                        Weekly Tips
-                      </p>
-                      <p className="text-muted-foreground text-xs">
-                        Weekly zen tips and affirmations
-                      </p>
-                    </div>
-                    <div className="space-y-2">
-                      <Heart className="text-primary mx-auto h-6 w-6" />
-                      <p className="text-foreground text-sm font-bold">
-                        Community
-                      </p>
-                      <p className="text-muted-foreground text-xs">
-                        Connect with our meditation community
-                      </p>
-                    </div>
-                    <div className="space-y-2">
-                      <Users className="text-primary mx-auto h-6 w-6" />
-                      <p className="text-foreground text-sm font-bold">
-                        Exclusive
-                      </p>
-                      <p className="text-muted-foreground text-xs">
-                        Access member-only content
-                      </p>
-                    </div>
-                  </motion.div>
-
-                  {/* Form */}
-                  <motion.form
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.3 }}
-                    onSubmit={handleJoin}
-                    className="w-full space-y-4"
-                  >
-                    <div className="flex flex-col gap-3 sm:flex-row">
-                      <input
-                        type="email"
-                        placeholder="your@email.com"
-                        value={email}
-                        onChange={(e) => {
-                          setEmail(e.target.value);
-                          setError('');
-                        }}
-                        data-testid="input-email-join"
-                        className="bg-secondary/20 focus:border-primary flex-1 rounded-full border-2 border-transparent px-6 py-4 text-lg transition-all focus:outline-none"
-                      />
-                      <motion.div
-                        whileHover={{ scale: 1.05 }}
-                        whileTap={{ scale: 0.95 }}
-                      >
-                        <button
-                          data-testid="button-join-submit"
-                          className="bg-primary text-primary-foreground hover:bg-primary/90 rounded-full px-8 py-3 font-bold shadow-lg"
+                  <form onSubmit={handleBooking} className="w-full space-y-6">
+                    <div className="grid gap-4 md:grid-cols-2">
+                      <div className="text-left">
+                        <label className="mb-2 block text-sm font-bold">
+                          Servicio *
+                        </label>
+                        <select
+                          value={service}
+                          onChange={(e) => setService(e.target.value)}
+                          className="bg-secondary/20 focus:border-primary w-full rounded-full border-2 border-transparent px-6 py-4 transition-all focus:outline-none"
                         >
-                          Join Now
-                        </button>
-                      </motion.div>
+                          <option value="">Selecciona un servicio</option>
+                          {services.map((item) => (
+                            <option key={item} value={item}>
+                              {item}
+                            </option>
+                          ))}
+                        </select>
+                      </div>
+
+                      <div className="text-left">
+                        <label className="mb-2 block text-sm font-bold">
+                          Fecha *
+                        </label>
+                        <div className="relative">
+                          <Calendar className="text-muted-foreground absolute left-5 top-1/2 h-5 w-5 -translate-y-1/2" />
+                          <input
+                            type="date"
+                            min={today}
+                            value={selectedDate}
+                            onChange={(e) => {
+                              setSelectedDate(e.target.value);
+                              setSelectedTime('');
+                              setError('');
+                            }}
+                            className="bg-secondary/20 focus:border-primary w-full rounded-full border-2 border-transparent py-4 pl-12 pr-6 transition-all focus:outline-none"
+                          />
+                        </div>
+                      </div>
                     </div>
+
+                    <div className="text-left">
+                      <label className="mb-3 block text-sm font-bold">
+                        Horario disponible *
+                      </label>
+
+                      {!selectedDate ? (
+                        <p className="text-muted-foreground text-sm">
+                          Primero selecciona una fecha para ver los horarios.
+                        </p>
+                      ) : (
+                        <div className="grid grid-cols-3 gap-3 sm:grid-cols-4 md:grid-cols-6">
+                          {availableTimes.map((time) => {
+                            const now = new Date();
+
+                            const reserved =
+                              busyTimes.includes(time) ||
+                              (selectedDate === today &&
+                                parseInt(time.split(':')[0]) <= now.getHours());
+
+                            return (
+                              <button
+                                type="button"
+                                key={time}
+                                disabled={reserved}
+                                onClick={() => {
+                                  if (!reserved) {
+                                    setSelectedTime(time);
+                                    setError('');
+                                  }
+                                }}
+                                className={`rounded-full border-2 px-4 py-3 text-sm font-bold transition-all ${reserved
+                                  ? 'cursor-not-allowed border-transparent opacity-30'
+                                  : selectedTime === time
+                                    ? 'bg-primary text-primary-foreground border-primary'
+                                    : 'border-border hover:border-primary'
+                                  }`}
+                              >
+                                <Clock className="mr-1 inline h-4 w-4" />
+                                {time}
+                              </button>
+                            );
+                          })}
+                        </div>
+                      )}
+                    </div>
+
+                    <div className="grid gap-4 md:grid-cols-2">
+                      <div className="text-left">
+                        <label className="mb-2 block text-sm font-bold">
+                          Nombre *
+                        </label>
+                        <div className="relative">
+                          <User className="text-muted-foreground absolute left-5 top-1/2 h-5 w-5 -translate-y-1/2" />
+                          <input
+                            type="text"
+                            placeholder="Tu nombre"
+                            value={name}
+                            onChange={(e) => setName(e.target.value)}
+                            className="bg-secondary/20 focus:border-primary w-full rounded-full border-2 border-transparent py-4 pl-12 pr-6 transition-all focus:outline-none"
+                          />
+                        </div>
+                      </div>
+
+                      <div className="text-left">
+                        <label className="mb-2 block text-sm font-bold">
+                          WhatsApp *
+                        </label>
+                        <div className="relative">
+                          <Phone className="text-muted-foreground absolute left-5 top-1/2 h-5 w-5 -translate-y-1/2" />
+                          <input
+                            type="tel"
+                            placeholder="Tu número"
+                            value={phone}
+                            onChange={(e) => setPhone(e.target.value)}
+                            className="bg-secondary/20 focus:border-primary w-full rounded-full border-2 border-transparent py-4 pl-12 pr-6 transition-all focus:outline-none"
+                          />
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="text-left">
+                      <label className="mb-2 block text-sm font-bold">
+                        Mensaje adicional
+                      </label>
+                      <textarea
+                        placeholder="Cuéntame detalles del evento, estilo de maquillaje o alguna preferencia."
+                        value={notes}
+                        onChange={(e) => setNotes(e.target.value)}
+                        rows={4}
+                        className="bg-secondary/20 focus:border-primary w-full resize-none rounded-3xl border-2 border-transparent px-6 py-4 transition-all focus:outline-none"
+                      />
+                    </div>
+
                     {error && (
-                      <motion.p
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        className="text-sm font-medium text-red-500"
-                      >
+                      <p className="text-sm font-medium text-red-500">
                         {error}
-                      </motion.p>
+                      </p>
                     )}
-                  </motion.form>
 
-                  {/* Stats */}
-                  <motion.div
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ delay: 0.4 }}
-                    className="border-border/40 w-full border-t pt-6"
-                  >
-                    <div className="flex items-center justify-center gap-6 text-sm">
-                      <div>
-                        <p className="text-foreground text-lg font-bold">
-                          {members}+
-                        </p>
-                        <p className="text-muted-foreground">Clowder Members</p>
-                      </div>
-                      <div className="bg-border/40 h-8 w-px" />
-                      <div>
-                        <p className="text-foreground text-lg font-bold">
-                          24/7
-                        </p>
-                        <p className="text-muted-foreground">
-                          Support Available
-                        </p>
-                      </div>
-                    </div>
-                  </motion.div>
+                    <motion.div
+                      whileHover={{ scale: 1.03 }}
+                      whileTap={{ scale: 0.97 }}
+                    >
+                      <button
+                        type="submit"
+                        className="bg-primary text-primary-foreground hover:bg-primary/90 flex w-full items-center justify-center gap-2 rounded-full px-8 py-4 font-bold shadow-lg"
+                      >
+                        <MessageCircle className="h-5 w-5" />
+                        Solicitar cita por WhatsApp
+                      </button>
+                    </motion.div>
+                  </form>
 
-                  {/* Privacy note */}
-                  <motion.p
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ delay: 0.5 }}
-                    className="text-muted-foreground text-xs"
-                  >
-                    We respect your privacy. No spam, just zen. Ever. 🐱
-                  </motion.p>
+                  <p className="text-muted-foreground text-xs">
+                    * La cita queda como solicitud y será confirmada por
+                    WhatsApp según disponibilidad.
+                  </p>
                 </>
               ) : (
-                <>
-                  {/* Success State */}
-                  <motion.div
-                    key="success"
-                    initial={{ opacity: 0, scale: 0.8 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    transition={{ type: 'spring', stiffness: 300, damping: 20 }}
-                    className="w-full space-y-6"
-                  >
-                    <motion.div
-                      animate={{ rotate: 360 }}
-                      transition={{ duration: 0.6 }}
-                      className="flex justify-center"
-                    >
-                      <div className="flex h-24 w-24 items-center justify-center rounded-full bg-green-100">
-                        <Heart className="h-12 w-12 fill-current text-green-600" />
-                      </div>
-                    </motion.div>
-
-                    <div className="space-y-2">
-                      <h2 className="font-heading text-foreground text-3xl font-bold">
-                        Welcome to the Clowder!
-                      </h2>
-                      <p className="text-muted-foreground text-lg">
-                        You're now part of our cat-loving community. Check your
-                        email for exclusive content! 📧
-                      </p>
+                <motion.div
+                  key="success"
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ type: 'spring', stiffness: 300, damping: 20 }}
+                  className="w-full space-y-6"
+                >
+                  <div className="flex justify-center">
+                    <div className="bg-primary/20 flex h-24 w-24 items-center justify-center rounded-full">
+                      <Heart className="text-primary h-12 w-12 fill-current" />
                     </div>
+                  </div>
 
-                    <motion.div
-                      initial={{ opacity: 0, y: 10 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: 0.3 }}
-                      className="space-y-3 pt-4"
-                    >
-                      <p className="text-foreground font-bold">What's next?</p>
-                      <div className="mx-auto max-w-sm space-y-2 text-left">
-                        <p className="flex items-start gap-2 text-sm">
-                          <span className="text-primary font-bold">✓</span>
-                          <span>
-                            Weekly meditation tips delivered to your inbox
-                          </span>
-                        </p>
-                        <p className="flex items-start gap-2 text-sm">
-                          <span className="text-primary font-bold">✓</span>
-                          <span>
-                            Exclusive breathing techniques & affirmations
-                          </span>
-                        </p>
-                        <p className="flex items-start gap-2 text-sm">
-                          <span className="text-primary font-bold">✓</span>
-                          <span>Join our growing community of zen-seekers</span>
-                        </p>
-                      </div>
-                    </motion.div>
+                  <div className="space-y-2">
+                    <h2 className="font-heading text-foreground text-3xl font-bold">
+                      ¡Solicitud enviada!
+                    </h2>
 
-                    <motion.div
-                      whileHover={{ scale: 1.05 }}
-                      whileTap={{ scale: 0.95 }}
-                      className="pt-4"
-                    >
-                      <a href="/app">
-                        <button
-                          data-testid="button-start-meditation"
-                          className="bg-primary text-primary-foreground hover:bg-primary/90 rounded-full px-8 py-3 font-bold"
-                        >
-                          Start Meditating Now
-                        </button>
-                      </a>
-                    </motion.div>
+                    <p className="text-muted-foreground mx-auto max-w-md text-lg">
+                      Gracias, {name}. Tu solicitud fue enviada por WhatsApp.
+                      Pronto recibirás confirmación de disponibilidad.
+                    </p>
+                  </div>
 
-                    <a href="/" className="inline-block">
-                      <button
-                        data-testid="button-back-home-join"
-                        className="border-primary text-primary hover:bg-primary/10 rounded-full border-2 px-8 py-2 transition-colors"
-                      >
-                        Back to Home
-                      </button>
-                    </a>
-                  </motion.div>
-                </>
+                  <div className="bg-secondary/20 mx-auto max-w-md rounded-3xl p-6 text-left text-sm">
+                    <p className="mb-3 font-bold">Resumen de la cita</p>
+                    <p>Servicio: {service}</p>
+                    <p>Fecha: {selectedDate}</p>
+                    <p>Hora: {selectedTime}</p>
+                    <p>WhatsApp: {phone}</p>
+                  </div>
+
+                  <a href="/" className="inline-block">
+                    <button className="border-primary text-primary hover:bg-primary/10 rounded-full border-2 px-8 py-2 transition-colors">
+                      Volver al inicio
+                    </button>
+                  </a>
+                </motion.div>
               )}
             </div>
           </div>
