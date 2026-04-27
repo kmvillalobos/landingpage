@@ -44,7 +44,7 @@ const Join = () => {
     fetchAvailability();
   }, [selectedDate]);
 
-  const WHATSAPP_NUMBER = '573001112233';
+  const WHATSAPP_NUMBER = '573116836400';
 
   const availableTimes = Array.from({ length: 24 }, (_, index) => {
     return `${String(index).padStart(2, '0')}:00`;
