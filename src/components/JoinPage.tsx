@@ -159,9 +159,11 @@ const Join = () => {
                     </h1>
 
                     <p className="text-muted-foreground mx-auto max-w-xl text-lg leading-relaxed">
-                      Agenda tu sesión de maquillaje profesional. Elige el
-                      servicio, fecha y horario. Cada cita tiene una duración
-                      aproximada de una hora.
+                      Agenda tu sesión de maquillaje profesional seleccionando el servicio, 
+                      la fecha y el horario que prefieras. Cada cita tiene una duración 
+                      aproximada de una hora. Si deseas servicio a domicilio, indícalo en 
+                      las observaciones junto con tu dirección; este servicio tiene un costo 
+                      adicional y será informado via WhatsApp.
                     </p>
                   </div>
 
@@ -294,7 +296,7 @@ const Join = () => {
 
                     <div className="text-left">
                       <label className="mb-2 block text-sm font-bold">
-                        Mensaje adicional
+                        Observaciones
                       </label>
                       <textarea
                         placeholder="Cuéntame detalles del evento, estilo de maquillaje o alguna preferencia."
@@ -317,9 +319,9 @@ const Join = () => {
                     >
                       <button
                         type="submit"
-                        className="bg-primary text-primary-foreground hover:bg-primary/90 flex w-full items-center justify-center gap-2 rounded-full px-8 py-4 font-bold shadow-lg"
+                        className="bg-primary text-button-text hover:bg-primary/90 flex w-full items-center justify-center gap-2 rounded-full px-8 py-4 font-bold shadow-lg"
                       >
-                        <MessageCircle className="h-5 w-5" />
+                        <MessageCircle className="h-5 w-5 text-button-text" />
                         Solicitar cita por WhatsApp
                       </button>
                     </motion.div>

@@ -14,6 +14,7 @@ import {
   CheckCircle,
 } from 'lucide-react';
 import { useState, useEffect } from 'react';
+import FaqBot from '../components/FaqBot';
 
 const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -85,7 +86,7 @@ const Navigation = () => {
         <a href="/join">
           <button
             data-testid="button-join-nav"
-            className="font-heading bg-primary text-primary-foreground hover:bg-primary/90 rounded-full px-6 py-2 font-bold shadow-lg transition-all hover:scale-105 hover:shadow-xl"
+            className="font-heading bg-primary text-button-text hover:bg-primary/90 rounded-full px-6 py-2 font-bold shadow-lg transition-all hover:scale-105 hover:shadow-xl"
           >
             Reserva tu cita
           </button>
@@ -648,6 +649,7 @@ export default function Home() {
     <div className="bg-background selection:bg-primary/20 selection:text-primary-foreground min-h-screen">
       <Navigation />
       <Hero />
+      <FaqBot />
       {/* <Services />
       <Community />
       <QuoteSection /> */}
