@@ -28,9 +28,9 @@
     ]
   },
   "dependencies": {
-    "@astrojs/react": "^4.4.2",
+    "@astrojs/react": "^5.0.4",
     "@astrojs/vercel": "^10.0.5",
-    "astro": "^5.16.9",
+    "astro": "^6.1.9",
     "clsx": "^2.1.1",
     "framer-motion": "^12.26.2",
     "googleapis": "^171.4.0",
