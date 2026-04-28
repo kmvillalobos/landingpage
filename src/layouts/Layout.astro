@@ -66,6 +66,7 @@ const canonicalUrl = `${siteUrl.replace(/\/$/, '')}${canonicalPath}`;
   @custom-variant hover (&:hover);
 
   @theme inline {
+    --color-button-text: hsl(var(--button-text));
     --color-background: hsl(var(--background));
     --color-foreground: hsl(var(--foreground));
     --color-card: hsl(var(--card));
@@ -97,10 +98,12 @@ const canonicalUrl = `${siteUrl.replace(/\/$/, '')}${canonicalPath}`;
   }
 
   :root {
+    --button-text: 43 33% 96%;
+
     --background: 40 33% 96%;
     --foreground: 25 10% 30%;
 
-    --primary: 6 78% 75%;
+    --primary: 21 35% 57%;
     --primary-foreground: 25 10% 20%;
 
     --secondary: 140 25% 85%;
@@ -123,7 +126,7 @@ const canonicalUrl = `${siteUrl.replace(/\/$/, '')}${canonicalPath}`;
 
     --border: 40 20% 90%;
     --input: 40 20% 90%;
-    --ring: 6 78% 75%;
+    --ring: 21 35% 57%;
 
     --radius: 1rem;
   }
