@@ -262,7 +262,7 @@ const Hero = () => {
           <motion.div
             animate={{ y: [0, -10, 0] }}
             transition={{ repeat: Infinity, duration: 4, ease: 'easeInOut' }}
-            className="bg-card absolute -bottom-8 -left-4 flex max-w-[200px] items-center gap-3 rounded-2xl p-4 shadow-lg md:left-10"
+            className="bg-card absolute -bottom-8 -left-4 flex max-w-[200px] items-center gap-3 rounded-2xl p-4 shadow-lg md:left-10 hidden sm:flex"
           >
             <div className="rounded-full bg-green-100 p-2 text-green-600">
               <Sparkles size={20} />
@@ -282,7 +282,7 @@ const Hero = () => {
               ease: 'easeInOut',
               delay: 0.5,
             }}
-            className="bg-card absolute -top-4 -right-4 flex max-w-[200px] items-center gap-3 rounded-2xl p-4 shadow-lg md:-right-8"
+            className="bg-card absolute -top-4 -right-4 flex max-w-[200px] items-center gap-3 rounded-2xl p-4 shadow-lg md:-right-8 hidden sm:flex"
           >
             <div className="rounded-full bg-blue-100 p-2 text-blue-600">
               <Users size={20} />
