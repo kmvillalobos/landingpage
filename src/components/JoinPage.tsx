@@ -35,7 +35,13 @@ const Join = () => {
 
       const busyHours = data.busy.map((slot: any) => {
         const date = new Date(slot.start);
-        return `${String(date.getHours()).padStart(2, '0')}:00`;
+
+        return new Intl.DateTimeFormat('es-CO', {
+          timeZone: 'America/Bogota',
+          hour: '2-digit',
+          minute: '2-digit',
+          hour12: false,
+        }).format(date);
       });
 
       setBusyTimes(busyHours);
@@ -58,7 +64,16 @@ const Join = () => {
     'Asesoría personalizada',
   ];
 
-  const today = new Date().toISOString().split('T')[0];
+  const getTodayInColombia = () => {
+    return new Intl.DateTimeFormat('en-CA', {
+      timeZone: 'America/Bogota',
+      year: 'numeric',
+      month: '2-digit',
+      day: '2-digit',
+    }).format(new Date());
+  };
+
+  const today = getTodayInColombia();
 
   const handleBooking = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -203,12 +218,18 @@ const Join = () => {
                       ) : (
                         <div className="grid grid-cols-3 gap-3 sm:grid-cols-4 md:grid-cols-6">
                           {availableTimes.map((time) => {
-                            const now = new Date();
+                            const nowHourColombia = Number(
+                              new Intl.DateTimeFormat('en-US', {
+                                timeZone: 'America/Bogota',
+                                hour: '2-digit',
+                                hour12: false,
+                              }).format(new Date()),
+                            );
 
                             const reserved =
                               busyTimes.includes(time) ||
                               (selectedDate === today &&
-                                parseInt(time.split(':')[0]) <= now.getHours());
+                                parseInt(time.split(':')[0]) <= nowHourColombia);
 
                             return (
                               <button
