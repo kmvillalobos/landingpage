@@ -38,7 +38,7 @@ const faqs = [
   {
     question: '¿Qué debo tener en cuenta antes de la cita?',
     answer:
-      'Te recomendamos asistir con el rostro limpio, sin maquillaje, y avisar previamente si tienes alguna alergia o condición en la piel para adaptar el servicio a ti.',
+      'Te recomendamos asistir con el rostro limpio y sin maquillaje.',
   },
   {
     question: '¿Qué métodos de pago aceptas?',

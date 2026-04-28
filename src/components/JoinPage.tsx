@@ -114,8 +114,14 @@ const Join = () => {
       return;
     }
 
-    const message = `Hola, quiero solicitar una cita de maquillaje.%0A%0ANombre: ${name}%0AWhatsApp: ${phone}%0AServicio: ${service}%0AFecha: ${selectedDate}%0AHora: ${selectedTime}%0AMensaje adicional: ${notes || 'Sin mensaje adicional'}`;
+    const message = `Hola, quiero agendar una cita 💄
 
+    Nombre: ${name}
+    Servicio: ${service}
+    Fecha: ${selectedDate}
+    Hora: ${selectedTime}
+    ¿Está disponible este horario?`;
+    
     window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${message}`, '_blank');
 
     setBooked(true);
@@ -159,10 +165,10 @@ const Join = () => {
                     </h1>
 
                     <p className="text-muted-foreground mx-auto max-w-xl text-lg leading-relaxed">
-                      Agenda tu sesión de maquillaje profesional seleccionando el servicio, 
-                      la fecha y el horario que prefieras. Cada cita tiene una duración 
-                      aproximada de una hora. Si deseas servicio a domicilio, indícalo en 
-                      las observaciones junto con tu dirección; este servicio tiene un costo 
+                      Agenda tu sesión de maquillaje profesional seleccionando el servicio,
+                      la fecha y el horario que prefieras. Cada cita tiene una duración
+                      aproximada de una hora. Si deseas servicio a domicilio, indícalo en
+                      las observaciones junto con tu dirección; este servicio tiene un costo
                       adicional y será informado via WhatsApp.
                     </p>
                   </div>

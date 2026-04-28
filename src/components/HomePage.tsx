@@ -67,8 +67,8 @@ const Navigation = () => {
             href={link.href}
             data-testid={`link-${link.id}`}
             className={`relative w-fit transition-colors ${activeSection === link.id
-                ? 'text-primary font-bold'
-                : 'text-muted-foreground hover:text-primary'
+              ? 'text-primary font-bold'
+              : 'text-muted-foreground hover:text-primary'
               }`}
           >
             <motion.div whileHover={{ scale: 1.05 }}>
@@ -129,8 +129,8 @@ const Navigation = () => {
                 }}
                 whileHover={{ x: 4 }}
                 className={`w-fit text-center text-lg font-medium transition-colors duration-300 ${activeSection === link.id
-                    ? 'text-primary font-bold'
-                    : 'text-foreground hover:text-primary'
+                  ? 'text-primary font-bold'
+                  : 'text-foreground hover:text-primary'
                   }`}
               >
                 {link.label}
@@ -157,7 +157,7 @@ const Navigation = () => {
                 >
                   <button
                     data-testid="button-join-mobile"
-                    className="font-heading bg-primary text-primary-foreground hover:bg-primary/90 w-full rounded-full py-4 font-medium shadow-lg transition-all hover:shadow-xl"
+                    className="font-heading bg-primary text-button-text hover:bg-primary/90 w-full rounded-full py-4 font-medium shadow-lg transition-all hover:shadow-xl"
                   >
                     Reserva tu cita
                   </button>
@@ -211,7 +211,7 @@ const Hero = () => {
             con un toque natural !
           </h1>
           <p className="text-muted-foreground max-w-md text-lg leading-relaxed md:text-xl">
-            Maquillaje profesional para eventos, novias y sesiones especiales, 
+            Maquillaje profesional para eventos, novias y sesiones especiales,
             diseñado para que te sientas auténtica, segura y radiante.
           </p>
 
@@ -301,13 +301,17 @@ const Hero = () => {
 
 const FeatureCard = ({
   title,
+  badge,
   desc,
+  price,
   img,
   delay,
   testId,
 }: {
   title: string;
+  badge: string;
   desc: string;
+  price: string;
   img: string;
   delay: number;
   testId: string;
@@ -322,327 +326,372 @@ const FeatureCard = ({
   >
     <div className="bg-card h-full overflow-hidden rounded-[2rem] border-none shadow-lg transition-shadow duration-300 hover:shadow-xl">
       <div className="flex h-full flex-col p-0">
-        <div className="bg-secondary/30 flex h-48 items-center justify-center p-8">
+        <div className="bg-secondary/30 h-56 overflow-hidden">
           <motion.img
             src={img}
             alt={title}
-            className="h-32 w-auto object-contain drop-shadow-md"
-            whileHover={{ scale: 1.1 }}
+            className="h-full w-full object-cover"
+            whileHover={{ scale: 1.05 }}
+            transition={{ duration: 0.4 }}
           />
         </div>
+
         <div className="flex flex-1 flex-col items-center p-8 text-center">
+          <span className="bg-primary/10 text-primary mb-4 rounded-full px-4 py-1 text-xs font-bold">
+            {badge}
+          </span>
+
           <h3 className="font-heading text-foreground mb-3 text-2xl font-bold">
             {title}
           </h3>
-          <p className="text-muted-foreground leading-relaxed">{desc}</p>
+
+          <p className="text-muted-foreground mb-5 leading-relaxed">{desc}</p>
+
+          <p className="text-primary mt-auto text-xl font-bold">{price}</p>
+
+          <a href="/join" className="mt-6">
+            <button className="bg-primary text-button-text hover:bg-primary/90 rounded-full px-6 py-3 text-sm font-bold shadow-md transition">
+              Reservar este servicio
+            </button>
+          </a>
         </div>
       </div>
     </div>
   </motion.div>
 );
 
-// const Services = () => {
-//   return (
-//     <section
-//       id="services"
-//       className="relative bg-white/50 px-6 py-24 md:px-12 lg:px-24"
-//     >
-//       <div className="mx-auto max-w-7xl">
-//         <div className="mb-16 space-y-4 text-center">
-//           <span className="font-hand text-primary text-xl">
-//             Why cats are gurus
-//           </span>
-//           <h2 className="font-heading text-foreground text-4xl font-bold md:text-5xl">
-//             The Way of the Meow
-//           </h2>
-//         </div>
+const Services = () => {
+  return (
+    <section
+      id="services"
+      className="relative bg-white/50 px-6 py-24 md:px-12 lg:px-24"
+    >
+      <div className="mx-auto max-w-7xl">
+        <div className="mb-16 space-y-4 text-center">
+          <span className="font-hand text-primary text-xl">
+            Servicios de maquillaje
+          </span>
 
-//         <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
-//           <FeatureCard
-//             title="Master of Chill"
-//             desc="Learn the ancient art of doing absolutely nothing and looking fabulous while doing it."
-//             img="/images/meditating_cat_illustration.png"
-//             delay={0.1}
-//             testId="card-feature-chill"
-//           />
-//           <FeatureCard
-//             title="Playful Spirit"
-//             desc="Rediscover your inner kitten. Chase dreams (and butterflies) with reckless abandon."
-//             img="/images/playful_cat_illustration.png"
-//             delay={0.2}
-//             testId="card-feature-playful"
-//           />
-//           <FeatureCard
-//             title="Soul Nourishment"
-//             desc="Feed your heart with unconditional love, head bumps, and the occasional slow blink."
-//             img="/images/cat_with_food_illustration.png"
-//             delay={0.3}
-//             testId="card-feature-nourishment"
-//           />
-//         </div>
-//       </div>
-//     </section>
-//   );
-// };
+          <h2 className="font-heading text-foreground mx-auto max-w-4xl text-4xl font-bold md:text-5xl">
+            Realza tu belleza con un maquillaje profesional diseñado para cada ocasión.
+          </h2>
 
-// const Community = () => {
-//   const testimonials = [
-//     {
-//       name: 'Sarah Chen',
-//       role: 'Meditation Teacher',
-//       quote:
-//         'Purrfectly Zen completely transformed how I view mindfulness. My cat approves too.',
-//       image: '/images/sarah_chen_meditation_teacher_portrait.png',
-//     },
-//     {
-//       name: 'Marcus Johnson',
-//       role: 'Wellness Coach',
-//       quote:
-//         'The cat philosophy here resonates deeply. Simplicity, presence, and the power of a good nap.',
-//       image: '/images/marcus_johnson_wellness_coach_portrait.png',
-//     },
-//     {
-//       name: 'Elena Rodriguez',
-//       role: 'Creative Director',
-//       quote:
-//         "I've never felt more zen. The community here truly understands the meow of life.",
-//       image: '/images/elena_rodriguez_creative_director_portrait.png',
-//     },
-//   ];
+          <p className="text-muted-foreground mx-auto max-w-2xl text-lg">
+            Cada servicio incluye técnica profesional, preparación de piel y un
+            acabado pensado para resaltar tu estilo de forma natural y elegante.
+          </p>
+        </div>
 
-//   return (
-//     <section id="community" className="relative px-6 py-24 md:px-12 lg:px-24">
-//       <div className="mx-auto max-w-7xl">
-//         <div className="mb-16 space-y-4 text-center">
-//           <span className="font-hand text-primary text-xl">
-//             Join our clowder
-//           </span>
-//           <h2 className="font-heading text-foreground text-4xl font-bold md:text-5xl">
-//             Community Stories
-//           </h2>
-//         </div>
+        <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
+          <FeatureCard
+            title="Maquillaje social"
+            badge="Más solicitado"
+            desc="Ideal para eventos y ocasiones especiales. Incluye preparación de la piel, maquillaje personalizado, pestañas tipo cortina y fijación para mayor duración."
+            price="Desde $130.000"
+            img="/images/maquillajesocial.png"
+            delay={0.1}
+            testId="card-service-social"
+          />
 
-//         <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
-//           {testimonials.map((person, idx) => (
-//             <motion.div
-//               key={idx}
-//               initial={{ opacity: 0, y: 30 }}
-//               whileInView={{ opacity: 1, y: 0 }}
-//               viewport={{ once: true }}
-//               transition={{ duration: 0.5, delay: idx * 0.1 }}
-//             >
-//               <div className="bg-card h-full rounded-[2rem] border-none shadow-lg transition-shadow duration-300 hover:shadow-xl">
-//                 <div className="flex h-full flex-col p-8">
-//                   <div className="mb-6 flex items-center gap-4">
-//                     <img
-//                       src={person.image}
-//                       alt={person.name}
-//                       className="h-14 w-14 rounded-full object-cover"
-//                     />
-//                     <div>
-//                       <p className="font-heading text-foreground font-bold">
-//                         {person.name}
-//                       </p>
-//                       <p className="text-muted-foreground text-sm">
-//                         {person.role}
-//                       </p>
-//                     </div>
-//                   </div>
-//                   <p className="text-muted-foreground flex-1 leading-relaxed italic">
-//                     "{person.quote}"
-//                   </p>
-//                 </div>
-//               </div>
-//             </motion.div>
-//           ))}
-//         </div>
-//       </div>
-//     </section>
-//   );
-// };
+          <FeatureCard
+            title="Maquillaje para novias"
+            badge="Servicio premium"
+            desc="Servicio completo para tu día especial, con maquillaje de alta duración, preparación de piel y asesoría personalizada para un resultado impecable."
+            price="Desde $550.000"
+            img="/images/maquillajenovia.png"
+            delay={0.2}
+            testId="card-service-bride"
+          />
 
-// const QuoteSection = () => {
-//   return (
-//     <section
-//       id="wisdom"
-//       className="bg-secondary/20 flex items-center justify-center px-6 py-24 text-center"
-//     >
-//       <motion.div
-//         className="relative max-w-3xl"
-//         initial={{ opacity: 0, y: 20 }}
-//         whileInView={{ opacity: 1, y: 0 }}
-//         viewport={{ once: true }}
-//         transition={{ duration: 0.6 }}
-//       >
-//         <h3
-//           data-testid="text-quote"
-//           className="font-hand text-foreground/80 text-3xl leading-relaxed md:text-5xl"
-//         >
-//           Time spent with cats is never wasted. It is a gentle reminder that we
-//           are here to be loved, and to nap.
-//         </h3>
+          <FeatureCard
+            title="Maquillaje quinceañera"
+            badge="Evento especial"
+            desc="Look fresco y elegante adaptado a tu estilo. Incluye preparación de piel, maquillaje acorde al evento, pestañas y fijación profesional."
+            price="Desde $450.000"
+            img="/images/maquillajequince.png"
+            delay={0.3}
+            testId="card-service-quince"
+          />
 
-//         <div className="font-heading text-primary mt-8 font-bold">
-//           — Sigmund Freud (probably)
-//         </div>
-//       </motion.div>
-//     </section>
-//   );
-// };
+          <FeatureCard
+            title="Peinado: Ondas"
+            badge="Complemento ideal"
+            desc="Ondas suaves y definidas para complementar tu maquillaje con un acabado armonioso, natural o glam."
+            price="Desde $60.000"
+            img="/images/peinadoondas.png"
+            delay={0.4}
+            testId="card-service-hair"
+          />
+        </div>
 
-// export const Footer = () => {
-//   return (
-//     <footer className="from-secondary/5 via-background to-primary/5 border-border/40 relative border-t bg-gradient-to-br px-6 py-16">
-//       <div className="mx-auto max-w-7xl">
-//         <div className="grid grid-cols-1 gap-12 md:grid-cols-3 md:gap-8 lg:gap-12">
-//           {/* Left Column: Brand */}
-//           <motion.div
-//             initial={{ opacity: 0, x: -20 }}
-//             whileInView={{ opacity: 1, x: 0 }}
-//             viewport={{ once: true }}
-//             transition={{ duration: 0.5 }}
-//             className="flex flex-col justify-center space-y-3"
-//           >
-//             <div className="flex items-center gap-3">
-//               <PawPrint className="text-primary h-7 w-7" />
-//               <h3 className="font-heading text-foreground text-lg font-bold">
-//                 Maria Torres MakeUp
-//               </h3>
-//             </div>
-//             <p className="text-muted-foreground text-sm leading-relaxed">
-//               Find your zen, one breath at a time. Meditate with your inner cat
-//               and discover peace within.
-//             </p>
-//           </motion.div>
+        <p className="text-muted-foreground mx-auto mt-8 max-w-2xl text-center text-sm">
+          * Servicio a domicilio disponible con costo adicional. El valor del
+          desplazamiento se define previamente por WhatsApp antes de prestar el
+          servicio.
+        </p>
+      </div>
+    </section>
+  );
+};
 
-//           {/* Center Column: Links by Category */}
-//           <motion.div
-//             initial={{ opacity: 0, y: 20 }}
-//             whileInView={{ opacity: 1, y: 0 }}
-//             viewport={{ once: true }}
-//             transition={{ duration: 0.5, delay: 0.1 }}
-//             className="space-y-6"
-//           >
-//             {/* Learn */}
-//             <div className="space-y-3">
-//               <div className="text-primary flex items-center gap-2">
-//                 <BookOpen className="h-5 w-5" />
-//                 <span className="font-heading text-sm font-bold">Learn</span>
-//               </div>
-//               <div className="flex flex-col gap-2 pl-7">
-//                 <a
-//                   href="/guide"
-//                   data-testid="link-footer-guide"
-//                   className="text-muted-foreground hover:text-primary w-fit text-sm transition-colors"
-//                 >
-//                   Getting Started
-//                 </a>
-//                 <a
-//                   href="/faq"
-//                   data-testid="link-footer-faq"
-//                   className="text-muted-foreground hover:text-primary w-fit text-sm transition-colors"
-//                 >
-//                   FAQ
-//                 </a>
-//               </div>
-//             </div>
+const Community = () => {
+  const testimonials = [
+    {
+      name: 'Sarah Chen',
+      role: 'Meditation Teacher',
+      quote:
+        'Purrfectly Zen completely transformed how I view mindfulness. My cat approves too.',
+      image: '/images/sarah_chen_meditation_teacher_portrait.png',
+    },
+    {
+      name: 'Marcus Johnson',
+      role: 'Wellness Coach',
+      quote:
+        'The cat philosophy here resonates deeply. Simplicity, presence, and the power of a good nap.',
+      image: '/images/marcus_johnson_wellness_coach_portrait.png',
+    },
+    {
+      name: 'Elena Rodriguez',
+      role: 'Creative Director',
+      quote:
+        "I've never felt more zen. The community here truly understands the meow of life.",
+      image: '/images/elena_rodriguez_creative_director_portrait.png',
+    },
+  ];
 
-//             {/* Community */}
-//             <div className="space-y-3">
-//               <div className="text-primary flex items-center gap-2">
-//                 <Users className="h-5 w-5" />
-//                 <span className="font-heading text-sm font-bold">
-//                   Community
-//                 </span>
-//               </div>
-//               <div className="flex flex-col gap-2 pl-7">
-//                 <a
-//                   href="/contact"
-//                   data-testid="link-footer-contact"
-//                   className="text-muted-foreground hover:text-primary w-fit text-sm transition-colors"
-//                 >
-//                   Contact Us
-//                 </a>
-//                 <a
-//                   href="/about"
-//                   data-testid="link-footer-about-community"
-//                   className="text-muted-foreground hover:text-primary w-fit text-sm transition-colors"
-//                 >
-//                   About Us
-//                 </a>
-//               </div>
-//             </div>
+  return (
+    <section id="community" className="relative px-6 py-24 md:px-12 lg:px-24">
+      <div className="mx-auto max-w-7xl">
+        <div className="mb-16 space-y-4 text-center">
+          <span className="font-hand text-primary text-xl">
+            Join our clowder
+          </span>
+          <h2 className="font-heading text-foreground text-4xl font-bold md:text-5xl">
+            Community Stories
+          </h2>
+        </div>
 
-//             {/* Legal */}
-//             <div className="space-y-3">
-//               <div className="text-primary flex items-center gap-2">
-//                 <Lock className="h-5 w-5" />
-//                 <span className="font-heading text-sm font-bold">Legal</span>
-//               </div>
-//               <div className="flex flex-col gap-2 pl-7">
-//                 <a
-//                   href="/privacy"
-//                   data-testid="link-footer-privacy"
-//                   className="text-muted-foreground hover:text-primary w-fit text-sm transition-colors"
-//                 >
-//                   Privacy Policy
-//                 </a>
-//               </div>
-//             </div>
-//           </motion.div>
+        <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
+          {testimonials.map((person, idx) => (
+            <motion.div
+              key={idx}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: idx * 0.1 }}
+            >
+              <div className="bg-card h-full rounded-[2rem] border-none shadow-lg transition-shadow duration-300 hover:shadow-xl">
+                <div className="flex h-full flex-col p-8">
+                  <div className="mb-6 flex items-center gap-4">
+                    <img
+                      src={person.image}
+                      alt={person.name}
+                      className="h-14 w-14 rounded-full object-cover"
+                    />
+                    <div>
+                      <p className="font-heading text-foreground font-bold">
+                        {person.name}
+                      </p>
+                      <p className="text-muted-foreground text-sm">
+                        {person.role}
+                      </p>
+                    </div>
+                  </div>
+                  <p className="text-muted-foreground flex-1 leading-relaxed italic">
+                    "{person.quote}"
+                  </p>
+                </div>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+};
 
-//           {/* Right Column: CTA */}
-//           <motion.div
-//             initial={{ opacity: 0, x: 20 }}
-//             whileInView={{ opacity: 1, x: 0 }}
-//             viewport={{ once: true }}
-//             transition={{ duration: 0.5, delay: 0.2 }}
-//             className="flex flex-col justify-center space-y-4"
-//           >
-//             <div className="space-y-2">
-//               <h4 className="font-heading text-foreground font-bold">
-//                 Join Our Community
-//               </h4>
-//               <p className="text-muted-foreground text-sm">
-//                 Connect with thousands of zen-seekers on your mindfulness
-//                 journey.
-//               </p>
-//             </div>
-//             <a href="/join" className="w-full">
-//               <motion.button
-//                 whileHover={{ scale: 1.05 }}
-//                 whileTap={{ scale: 0.95 }}
-//                 data-testid="button-footer-cta"
-//                 className="bg-primary text-primary-foreground hover:bg-primary/90 w-full rounded-full px-6 py-3 font-bold shadow-lg transition-all hover:shadow-xl"
-//               >
-//                 Reserva tu cita
-//               </motion.button>
-//             </a>
-//           </motion.div>
-//         </div>
+const QuoteSection = () => {
+  return (
+    <section
+      id="wisdom"
+      className="bg-secondary/20 flex items-center justify-center px-6 py-24 text-center"
+    >
+      <motion.div
+        className="relative max-w-3xl"
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.6 }}
+      >
+        <h3
+          data-testid="text-quote"
+          className="font-hand text-foreground/80 text-3xl leading-relaxed md:text-5xl"
+        >
+          Time spent with cats is never wasted. It is a gentle reminder that we
+          are here to be loved, and to nap.
+        </h3>
 
-//         {/* Divider */}
-//         <div className="border-border/40 my-8 border-t" />
+        <div className="font-heading text-primary mt-8 font-bold">
+          — Sigmund Freud (probably)
+        </div>
+      </motion.div>
+    </section>
+  );
+};
 
-//         {/* Bottom: Copyright */}
-//         <motion.div
-//           initial={{ opacity: 0 }}
-//           whileInView={{ opacity: 1 }}
-//           viewport={{ once: true }}
-//           className="text-muted-foreground/60 flex flex-col items-center justify-between gap-4 text-center text-xs md:flex-row"
-//         >
-//           <p>
-//             &copy; {new Date().getFullYear()} Fauzira Alpiandi. All rights
-//             reserved.
-//           </p>
-//           <p className="flex items-center justify-center gap-1">
-//             Built with <Heart className="h-3 w-3 text-red-400" /> for cat lovers
-//           </p>
-//         </motion.div>
-//       </div>
-//     </footer>
-//   );
-// };
+export const Footer = () => {
+  return (
+    <footer className="from-secondary/5 via-background to-primary/5 border-border/40 relative border-t bg-gradient-to-br px-6 py-16">
+      <div className="mx-auto max-w-7xl">
+        <div className="grid grid-cols-1 gap-12 md:grid-cols-3 md:gap-8 lg:gap-12">
+          {/* Left Column: Brand */}
+          <motion.div
+            initial={{ opacity: 0, x: -20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            className="flex flex-col justify-center space-y-3"
+          >
+            <div className="flex items-center gap-3">
+              <PawPrint className="text-primary h-7 w-7" />
+              <h3 className="font-heading text-foreground text-lg font-bold">
+                Maria Torres MakeUp
+              </h3>
+            </div>
+            <p className="text-muted-foreground text-sm leading-relaxed">
+              Find your zen, one breath at a time. Meditate with your inner cat
+              and discover peace within.
+            </p>
+          </motion.div>
+
+          {/* Center Column: Links by Category */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+            className="space-y-6"
+          >
+            {/* Learn */}
+            <div className="space-y-3">
+              <div className="text-primary flex items-center gap-2">
+                <BookOpen className="h-5 w-5" />
+                <span className="font-heading text-sm font-bold">Learn</span>
+              </div>
+              <div className="flex flex-col gap-2 pl-7">
+                <a
+                  href="/guide"
+                  data-testid="link-footer-guide"
+                  className="text-muted-foreground hover:text-primary w-fit text-sm transition-colors"
+                >
+                  Getting Started
+                </a>
+                <a
+                  href="/faq"
+                  data-testid="link-footer-faq"
+                  className="text-muted-foreground hover:text-primary w-fit text-sm transition-colors"
+                >
+                  FAQ
+                </a>
+              </div>
+            </div>
+
+            {/* Community */}
+            <div className="space-y-3">
+              <div className="text-primary flex items-center gap-2">
+                <Users className="h-5 w-5" />
+                <span className="font-heading text-sm font-bold">
+                  Community
+                </span>
+              </div>
+              <div className="flex flex-col gap-2 pl-7">
+                <a
+                  href="/contact"
+                  data-testid="link-footer-contact"
+                  className="text-muted-foreground hover:text-primary w-fit text-sm transition-colors"
+                >
+                  Contact Us
+                </a>
+                <a
+                  href="/about"
+                  data-testid="link-footer-about-community"
+                  className="text-muted-foreground hover:text-primary w-fit text-sm transition-colors"
+                >
+                  About Us
+                </a>
+              </div>
+            </div>
+
+            {/* Legal */}
+            <div className="space-y-3">
+              <div className="text-primary flex items-center gap-2">
+                <Lock className="h-5 w-5" />
+                <span className="font-heading text-sm font-bold">Legal</span>
+              </div>
+              <div className="flex flex-col gap-2 pl-7">
+                <a
+                  href="/privacy"
+                  data-testid="link-footer-privacy"
+                  className="text-muted-foreground hover:text-primary w-fit text-sm transition-colors"
+                >
+                  Privacy Policy
+                </a>
+              </div>
+            </div>
+          </motion.div>
+
+          {/* Right Column: CTA */}
+          <motion.div
+            initial={{ opacity: 0, x: 20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            className="flex flex-col justify-center space-y-4"
+          >
+            <div className="space-y-2">
+              <h4 className="font-heading text-foreground font-bold">
+                Join Our Community
+              </h4>
+              <p className="text-muted-foreground text-sm">
+                Connect with thousands of zen-seekers on your mindfulness
+                journey.
+              </p>
+            </div>
+            <a href="/join" className="w-full">
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                data-testid="button-footer-cta"
+                className="bg-primary text-primary-foreground hover:bg-primary/90 w-full rounded-full px-6 py-3 font-bold shadow-lg transition-all hover:shadow-xl"
+              >
+                Reserva tu cita
+              </motion.button>
+            </a>
+          </motion.div>
+        </div>
+
+        {/* Divider */}
+        <div className="border-border/40 my-8 border-t" />
+
+        {/* Bottom: Copyright */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          className="text-muted-foreground/60 flex flex-col items-center justify-between gap-4 text-center text-xs md:flex-row"
+        >
+          <p>
+            &copy; {new Date().getFullYear()} Fauzira Alpiandi. All rights
+            reserved.
+          </p>
+          <p className="flex items-center justify-center gap-1">
+            Built with <Heart className="h-3 w-3 text-red-400" /> for cat lovers
+          </p>
+        </motion.div>
+      </div>
+    </footer>
+  );
+};
 
 export default function Home() {
   return (
@@ -650,9 +699,9 @@ export default function Home() {
       <Navigation />
       <Hero />
       <FaqBot />
-      {/* <Services />
-      <Community />
-      <QuoteSection /> */}
+      <Services />
+      {/* <Community />
+      <QuoteSection />  */}
       {/* <section id="cta" className="px-6 py-24">
         <div className="mx-auto max-w-6xl">
           <motion.div
