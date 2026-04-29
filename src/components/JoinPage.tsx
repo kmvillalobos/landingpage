@@ -121,7 +121,7 @@ const Join = () => {
     Fecha: ${selectedDate}
     Hora: ${selectedTime}
     ¿Está disponible este horario?`;
-    
+
     window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${message}`, '_blank');
 
     setBooked(true);
