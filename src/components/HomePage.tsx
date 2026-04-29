@@ -43,7 +43,7 @@ const Navigation = () => {
 
   const navLinks = [
     { href: '#services', label: 'Servicios', id: 'services' },
-    { href: '#community', label: 'Portafolio', id: 'community' },
+    { href: '#community', label: 'Testimonios', id: 'community' },
     { href: '#wisdom', label: 'Sobre mí', id: 'wisdom' },
   ];
 
@@ -437,73 +437,99 @@ const Services = () => {
 const Community = () => {
   const testimonials = [
     {
-      name: 'Sarah Chen',
-      role: 'Meditation Teacher',
+      name: 'Laura Martínez',
+      role: 'Maquillaje social',
       quote:
-        'Purrfectly Zen completely transformed how I view mindfulness. My cat approves too.',
-      image: '/images/sarah_chen_meditation_teacher_portrait.png',
+        'Me encantó el resultado. Fue un maquillaje muy natural, elegante y duró perfecto durante todo el evento.',
+      image: '/images/lauram.png',
     },
     {
-      name: 'Marcus Johnson',
-      role: 'Wellness Coach',
+      name: 'Daniela Pérez',
+      role: 'Novia',
       quote:
-        'The cat philosophy here resonates deeply. Simplicity, presence, and the power of a good nap.',
-      image: '/images/marcus_johnson_wellness_coach_portrait.png',
+        'Me sentí hermosa y segura en mi día especial. El maquillaje quedó impecable y tal como lo imaginaba.',
+      image: '/images/danielap.png',
     },
     {
-      name: 'Elena Rodriguez',
-      role: 'Creative Director',
+      name: 'Camila Torres',
+      role: 'Quinceañera',
       quote:
-        "I've never felt more zen. The community here truly understands the meow of life.",
-      image: '/images/elena_rodriguez_creative_director_portrait.png',
+        'El look fue delicado, fresco y muy acorde a mi estilo. Me sentí muy cómoda y feliz con el resultado.',
+      image: '/images/camilat.png',
+    },
+    {
+      name: 'Valentina Gómez',
+      role: 'Maquillaje social',
+      quote:
+        'La atención fue excelente. Me sentí escuchada y el maquillaje quedó justo como lo quería.',
+      image: '/images/sofiah.png',
+    },
+    {
+      name: 'Sofía Herrera',
+      role: 'Ondas y maquillaje',
+      quote:
+        'El maquillaje y las ondas se mantuvieron hermosos durante todo el evento. Amé el resultado.',
+      image: '/images/valentinag.png',
     },
   ];
 
+  const duplicatedTestimonials = [...testimonials, ...testimonials, ...testimonials];
+
   return (
-    <section id="community" className="relative px-6 py-24 md:px-12 lg:px-24">
+    <section id="community" className="relative overflow-hidden px-6 py-24 md:px-12 lg:px-24">
       <div className="mx-auto max-w-7xl">
         <div className="mb-16 space-y-4 text-center">
           <span className="font-hand text-primary text-xl">
-            Join our clowder
+            Experiencias reales
           </span>
           <h2 className="font-heading text-foreground text-4xl font-bold md:text-5xl">
-            Community Stories
+            Lo que dicen mis clientas
           </h2>
         </div>
 
-        <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
-          {testimonials.map((person, idx) => (
-            <motion.div
-              key={idx}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: idx * 0.1 }}
-            >
-              <div className="bg-card h-full rounded-[2rem] border-none shadow-lg transition-shadow duration-300 hover:shadow-xl">
-                <div className="flex h-full flex-col p-8">
-                  <div className="mb-6 flex items-center gap-4">
-                    <img
-                      src={person.image}
-                      alt={person.name}
-                      className="h-14 w-14 rounded-full object-cover"
-                    />
-                    <div>
-                      <p className="font-heading text-foreground font-bold">
-                        {person.name}
-                      </p>
-                      <p className="text-muted-foreground text-sm">
-                        {person.role}
-                      </p>
+        <div className="relative overflow-hidden">
+          <motion.div
+            className="flex w-max gap-8"
+            animate={{ x: ['0%', '-50%'] }}
+            transition={{
+              duration: 35,
+              ease: 'linear',
+              repeat: Infinity,
+              repeatType: 'loop',
+            }}
+          >
+            {duplicatedTestimonials.map((person, idx) => (
+              <div key={idx} className="w-[320px] shrink-0 md:w-[380px]">
+                <div className="bg-card h-full rounded-[2rem] border-none shadow-lg transition-shadow duration-300 hover:shadow-xl">
+                  <div className="flex h-full flex-col p-8">
+                    <div className="mb-6 flex items-center gap-4">
+                      <img
+                        src={person.image}
+                        alt={person.name}
+                        className="h-14 w-14 rounded-full object-cover"
+                      />
+
+                      <div>
+                        <p className="font-heading text-foreground font-bold">
+                          {person.name}
+                        </p>
+                        <p className="text-muted-foreground text-sm">
+                          {person.role}
+                        </p>
+                      </div>
                     </div>
+
+                    <p className="text-muted-foreground flex-1 leading-relaxed italic">
+                      "{person.quote}"
+                    </p>
                   </div>
-                  <p className="text-muted-foreground flex-1 leading-relaxed italic">
-                    "{person.quote}"
-                  </p>
                 </div>
               </div>
-            </motion.div>
-          ))}
+            ))}
+          </motion.div>
+
+          <div className="pointer-events-none absolute left-0 top-0 h-full w-20 bg-gradient-to-r from-background to-transparent" />
+          <div className="pointer-events-none absolute right-0 top-0 h-full w-20 bg-gradient-to-l from-background to-transparent" />
         </div>
       </div>
     </section>
@@ -700,8 +726,8 @@ export default function Home() {
       <Hero />
       <FaqBot />
       <Services />
-      {/* <Community />
-      <QuoteSection />  */}
+      <Community />
+      {/* <QuoteSection />  */}
       {/* <section id="cta" className="px-6 py-24">
         <div className="mx-auto max-w-6xl">
           <motion.div
