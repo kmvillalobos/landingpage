@@ -2,6 +2,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import {
   Heart,
   Sparkles,
+  MessageCircle,
   Menu,
   X,
   PawPrint,
@@ -22,7 +23,7 @@ const Navigation = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      const sections = ['home', 'services', 'community', 'wisdom', 'cta'];
+      const sections = ['home', 'services', 'community', 'aboutme ', 'cta'];
       let current = 'home';
 
       for (const section of sections) {
@@ -44,7 +45,7 @@ const Navigation = () => {
   const navLinks = [
     { href: '#services', label: 'Servicios', id: 'services' },
     { href: '#community', label: 'Testimonios', id: 'community' },
-    { href: '#wisdom', label: 'Sobre mí', id: 'wisdom' },
+    { href: '#aboutme ', label: 'Sobre mí', id: 'aboutme ' },
   ];
 
   return (
@@ -360,6 +361,122 @@ const FeatureCard = ({
   </motion.div>
 );
 
+const Aboutme = () => {
+  return (
+    <section id="aboutme" className="relative overflow-hidden px-6 py-28 md:px-12 lg:px-24">
+      <div className="absolute left-0 top-20 h-72 w-72 rounded-full bg-primary/10 blur-3xl" />
+      <div className="absolute bottom-10 right-0 h-72 w-72 rounded-full bg-accent/20 blur-3xl" />
+
+      <div className="relative mx-auto grid max-w-7xl items-center gap-14 lg:grid-cols-[0.9fr_1.1fr]">
+        {/* Imagen */}
+        <motion.div
+          initial={{ opacity: 0, x: -30 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="relative"
+        >
+          <div className="absolute -left-4 -top-4 h-full w-full rounded-[2.5rem] bg-primary/20" />
+
+          <div className="relative overflow-hidden rounded-[2.5rem] bg-card shadow-2xl">
+            <img
+              src="/images/fondomtmakeup2.png"
+              alt="Maria Torres MakeUp"
+              className="h-[520px] w-full object-cover object-center"
+            />
+
+            <div className="absolute bottom-5 left-5 right-5 rounded-[1.5rem] bg-white/85 p-5 shadow-lg backdrop-blur-md">
+              <p className="font-heading text-foreground text-xl font-bold">
+                Maria Torres
+              </p>
+              <p className="text-muted-foreground text-sm">
+                Makeup Artist · Belleza natural y elegante
+              </p>
+            </div>
+          </div>
+        </motion.div>
+
+        {/* Contenido */}
+        <motion.div
+          initial={{ opacity: 0, x: 30 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="space-y-8"
+        >
+          <div className="space-y-4">
+            <span className="font-hand text-primary text-2xl">
+              Sobre mí
+            </span>
+
+            <h2 className="font-heading text-foreground max-w-3xl text-4xl font-bold leading-tight md:text-5xl">
+              Maquillaje pensado para resaltar tu esencia, no para ocultarla.
+            </h2>
+
+            <p className="text-muted-foreground max-w-2xl text-lg leading-relaxed">
+              Soy Maria Torres, makeup artist. Mi trabajo se enfoca en crear looks
+              elegantes, naturales y personalizados para que te sientas segura,
+              auténtica y radiante en cada momento especial.
+            </p>
+          </div>
+
+          <div className="grid gap-4 sm:grid-cols-2">
+            <div className="rounded-[1.5rem] bg-card p-5 shadow-md">
+              <p className="font-heading text-foreground mb-2 text-lg font-bold">
+                ✨ Atención personalizada
+              </p>
+              <p className="text-muted-foreground text-sm leading-relaxed">
+                Cada look se adapta a tu tipo de piel, estilo, evento y preferencias.
+              </p>
+            </div>
+
+            <div className="rounded-[1.5rem] bg-card p-5 shadow-md">
+              <p className="font-heading text-foreground mb-2 text-lg font-bold">
+                💄 Acabado profesional
+              </p>
+              <p className="text-muted-foreground text-sm leading-relaxed">
+                Preparación de piel, aplicación cuidadosa y fijación para mayor duración.
+              </p>
+            </div>
+
+            <div className="rounded-[1.5rem] bg-card p-5 shadow-md">
+              <p className="font-heading text-foreground mb-2 text-lg font-bold">
+                🤍 Belleza natural
+              </p>
+              <p className="text-muted-foreground text-sm leading-relaxed">
+                Looks sutiles, frescos y elegantes que mantienen tu esencia.
+              </p>
+            </div>
+
+            <div className="rounded-[1.5rem] bg-card p-5 shadow-md">
+              <p className="font-heading text-foreground mb-2 text-lg font-bold">
+                📲 Reserva fácil
+              </p>
+              <p className="text-muted-foreground text-sm leading-relaxed">
+                Agenda desde la web y confirma los detalles directamente por WhatsApp.
+              </p>
+            </div>
+          </div>
+
+          <div className="flex flex-col gap-4 sm:flex-row sm:items-center">
+            <a href="/join">
+              <button className="bg-primary text-button-text hover:bg-primary/90 rounded-full px-8 py-3 font-bold shadow-lg transition">
+                Reserva tu cita
+              </button>
+            </a>
+
+            <a href="#services">
+              <button className="border-primary text-primary hover:bg-primary/10 rounded-full border-2 px-8 py-3 font-bold transition">
+                Ver servicios
+              </button>
+            </a>
+          </div>
+        </motion.div>
+      </div>
+    </section>
+  );
+};
+
 const Services = () => {
   return (
     <section
@@ -539,7 +656,6 @@ const Community = () => {
 const QuoteSection = () => {
   return (
     <section
-      id="wisdom"
       className="bg-secondary/20 flex items-center justify-center px-6 py-24 text-center"
     >
       <motion.div
@@ -553,24 +669,27 @@ const QuoteSection = () => {
           data-testid="text-quote"
           className="font-hand text-foreground/80 text-3xl leading-relaxed md:text-5xl"
         >
-          Time spent with cats is never wasted. It is a gentle reminder that we
-          are here to be loved, and to nap.
+          No se trata de transformar,
+          sino de realzar con delicadeza,
+          respetar tu esencia
+          y crear un look que hable por ti
+          en cada momento especial.
         </h3>
 
         <div className="font-heading text-primary mt-8 font-bold">
-          — Sigmund Freud (probably)
+          — Maria Torres
         </div>
       </motion.div>
     </section>
   );
 };
 
-export const Footer = () => {
+const Footer = () => {
   return (
     <footer className="from-secondary/5 via-background to-primary/5 border-border/40 relative border-t bg-gradient-to-br px-6 py-16">
       <div className="mx-auto max-w-7xl">
         <div className="grid grid-cols-1 gap-12 md:grid-cols-3 md:gap-8 lg:gap-12">
-          {/* Left Column: Brand */}
+          {/* Brand */}
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -579,18 +698,19 @@ export const Footer = () => {
             className="flex flex-col justify-center space-y-3"
           >
             <div className="flex items-center gap-3">
-              <PawPrint className="text-primary h-7 w-7" />
+              <Sparkles className="text-primary h-7 w-7" />
               <h3 className="font-heading text-foreground text-lg font-bold">
                 Maria Torres MakeUp
               </h3>
             </div>
-            <p className="text-muted-foreground text-sm leading-relaxed">
-              Find your zen, one breath at a time. Meditate with your inner cat
-              and discover peace within.
+
+            <p className="text-muted-foreground max-w-sm text-sm leading-relaxed">
+              Maquillaje profesional para resaltar tu belleza natural con looks
+              elegantes, personalizados y pensados para cada ocasión especial.
             </p>
           </motion.div>
 
-          {/* Center Column: Links by Category */}
+          {/* Links */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -598,75 +718,67 @@ export const Footer = () => {
             transition={{ duration: 0.5, delay: 0.1 }}
             className="space-y-6"
           >
-            {/* Learn */}
             <div className="space-y-3">
               <div className="text-primary flex items-center gap-2">
-                <BookOpen className="h-5 w-5" />
-                <span className="font-heading text-sm font-bold">Learn</span>
-              </div>
-              <div className="flex flex-col gap-2 pl-7">
-                <a
-                  href="/guide"
-                  data-testid="link-footer-guide"
-                  className="text-muted-foreground hover:text-primary w-fit text-sm transition-colors"
-                >
-                  Getting Started
-                </a>
-                <a
-                  href="/faq"
-                  data-testid="link-footer-faq"
-                  className="text-muted-foreground hover:text-primary w-fit text-sm transition-colors"
-                >
-                  FAQ
-                </a>
-              </div>
-            </div>
-
-            {/* Community */}
-            <div className="space-y-3">
-              <div className="text-primary flex items-center gap-2">
-                <Users className="h-5 w-5" />
+                <Heart className="h-5 w-5" />
                 <span className="font-heading text-sm font-bold">
-                  Community
+                  Explora
                 </span>
               </div>
+
               <div className="flex flex-col gap-2 pl-7">
                 <a
-                  href="/contact"
-                  data-testid="link-footer-contact"
+                  href="#services"
                   className="text-muted-foreground hover:text-primary w-fit text-sm transition-colors"
                 >
-                  Contact Us
+                  Servicios
                 </a>
+
                 <a
-                  href="/about"
-                  data-testid="link-footer-about-community"
+                  href="#community"
                   className="text-muted-foreground hover:text-primary w-fit text-sm transition-colors"
                 >
-                  About Us
+                  Testimonios
+                </a>
+
+                <a
+                  href="#aboutme"
+                  className="text-muted-foreground hover:text-primary w-fit text-sm transition-colors"
+                >
+                  Sobre mí
                 </a>
               </div>
             </div>
 
-            {/* Legal */}
             <div className="space-y-3">
               <div className="text-primary flex items-center gap-2">
-                <Lock className="h-5 w-5" />
-                <span className="font-heading text-sm font-bold">Legal</span>
+                <MessageCircle className="h-5 w-5" />
+                <span className="font-heading text-sm font-bold">
+                  Contacto
+                </span>
               </div>
+
               <div className="flex flex-col gap-2 pl-7">
                 <a
-                  href="/privacy"
-                  data-testid="link-footer-privacy"
+                  href="https://wa.me/573015955097"
+                  target="_blank"
+                  rel="noreferrer"
                   className="text-muted-foreground hover:text-primary w-fit text-sm transition-colors"
                 >
-                  Privacy Policy
+                  WhatsApp
+                </a>
+
+                <a
+                  href="/join"
+                  className="text-muted-foreground hover:text-primary w-fit text-sm transition-colors"
+                >
+                  Agendar cita
                 </a>
               </div>
             </div>
           </motion.div>
 
-          {/* Right Column: CTA */}
+          {/* CTA */}
           <motion.div
             initial={{ opacity: 0, x: 20 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -676,19 +788,20 @@ export const Footer = () => {
           >
             <div className="space-y-2">
               <h4 className="font-heading text-foreground font-bold">
-                Join Our Community
+                ¿Lista para tu próximo look?
               </h4>
-              <p className="text-muted-foreground text-sm">
-                Connect with thousands of zen-seekers on your mindfulness
-                journey.
+
+              <p className="text-muted-foreground text-sm leading-relaxed">
+                Agenda tu sesión de maquillaje y confirma todos los detalles
+                directamente por WhatsApp.
               </p>
             </div>
+
             <a href="/join" className="w-full">
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                data-testid="button-footer-cta"
-                className="bg-primary text-primary-foreground hover:bg-primary/90 w-full rounded-full px-6 py-3 font-bold shadow-lg transition-all hover:shadow-xl"
+                className="bg-primary text-button-text hover:bg-primary/90 w-full rounded-full px-6 py-3 font-bold shadow-lg transition-all hover:shadow-xl"
               >
                 Reserva tu cita
               </motion.button>
@@ -696,10 +809,8 @@ export const Footer = () => {
           </motion.div>
         </div>
 
-        {/* Divider */}
         <div className="border-border/40 my-8 border-t" />
 
-        {/* Bottom: Copyright */}
         <motion.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
@@ -707,11 +818,13 @@ export const Footer = () => {
           className="text-muted-foreground/60 flex flex-col items-center justify-between gap-4 text-center text-xs md:flex-row"
         >
           <p>
-            &copy; {new Date().getFullYear()} Fauzira Alpiandi. All rights
-            reserved.
+            &copy; {new Date().getFullYear()} Maria Torres MakeUp. Todos los
+            derechos reservados.
           </p>
+
           <p className="flex items-center justify-center gap-1">
-            Built with <Heart className="h-3 w-3 text-red-400" /> for cat lovers
+            Hecho con <Heart className="text-primary h-3 w-3 fill-current" />{' '}
+            para resaltar tu belleza
           </p>
         </motion.div>
       </div>
@@ -727,86 +840,9 @@ export default function Home() {
       <FaqBot />
       <Services />
       <Community />
-      {/* <QuoteSection />  */}
-      {/* <section id="cta" className="px-6 py-24">
-        <div className="mx-auto max-w-6xl">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="mb-12 space-y-4 text-center"
-          >
-            <h2 className="font-heading text-foreground text-4xl font-bold md:text-5xl">
-              Ready to find your zen?
-            </h2>
-            <p className="text-muted-foreground mx-auto max-w-2xl text-lg">
-              Choose your path and start your zen journey today
-            </p>
-          </motion.div>
-
-          <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
-            {[
-              {
-                id: 'cta-start-app',
-                title: 'Start Meditating',
-                description:
-                  'Meditate with your inner cat. Start with our breathing timer and find your calm.',
-                href: '/app',
-                testId: 'button-cta-app',
-                icon: <Heart className="text-primary h-8 w-8" />,
-              },
-              {
-                id: 'cta-guide',
-                title: 'Start Learning',
-                description:
-                  'Learn the fundamentals of meditation. A step-by-step guide for beginners and beyond.',
-                href: '/guide',
-                testId: 'button-cta-guide',
-                icon: <BookOpen className="text-primary h-8 w-8" />,
-              },
-              {
-                id: 'cta-explore',
-                title: 'Explore More',
-                description:
-                  'Discover zen tips, breathing techniques, and daily affirmations to deepen your practice.',
-                href: '/explore',
-                testId: 'button-cta-explore',
-                icon: <Compass className="text-primary h-8 w-8" />,
-              },
-            ].map((cta, idx) => (
-              <motion.div
-                key={cta.id}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: idx * 0.1, duration: 0.5 }}
-                whileHover={{ y: -8 }}
-                className="bg-card flex h-full flex-col items-center gap-4 rounded-[2rem] p-8 text-center shadow-lg transition-shadow hover:shadow-xl"
-              >
-                <div className="bg-primary/15 flex h-16 w-16 items-center justify-center rounded-full">
-                  {cta.icon}
-                </div>
-                <h3 className="font-heading text-foreground text-2xl font-bold">
-                  {cta.title}
-                </h3>
-                <p className="text-muted-foreground flex-1">
-                  {cta.description}
-                </p>
-                <a href={cta.href}>
-                  <button
-                    data-testid={cta.testId}
-                    className="bg-primary text-primary-foreground hover:bg-primary/90 cursor-pointer rounded-full px-6 py-2 text-sm font-bold shadow-md transition-colors"
-                  >
-                    Get Started
-                  </button>
-                </a>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section> */}
-      {/* <Footer /> */}
+      <Aboutme />
+      <QuoteSection />
+      <Footer />
     </div>
   );
 }
