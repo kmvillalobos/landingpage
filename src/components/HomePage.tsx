@@ -591,66 +591,6 @@ const Community = () => {
   ];
 
   const duplicatedTestimonials = [...testimonials, ...testimonials, ...testimonials];
-
-  return (
-    <section id="community" className="relative overflow-hidden px-6 py-24 md:px-12 lg:px-24">
-      <div className="mx-auto max-w-7xl">
-        <div className="mb-16 space-y-4 text-center">
-          <span className="font-hand text-primary text-xl">
-            Experiencias reales
-          </span>
-          <h2 className="font-heading text-foreground text-4xl font-bold md:text-5xl">
-            Lo que dicen mis clientas
-          </h2>
-        </div>
-
-        <div className="relative overflow-hidden">
-          <motion.div
-            className="flex w-max gap-8"
-            animate={{ x: ['0%', '-50%'] }}
-            transition={{
-              duration: 35,
-              ease: 'linear',
-              repeat: Infinity,
-              repeatType: 'loop',
-            }}
-          >
-            {duplicatedTestimonials.map((person, idx) => (
-              <div key={idx} className="w-[320px] shrink-0 md:w-[380px]">
-                <div className="bg-card h-full rounded-[2rem] border-none shadow-lg transition-shadow duration-300 hover:shadow-xl">
-                  <div className="flex h-full flex-col p-8">
-                    <div className="mb-6 flex items-center gap-4">
-                      <img
-                        src={person.image}
-                        alt={person.name}
-                        className="h-14 w-14 rounded-full object-cover"
-                      />
-
-                      <div>
-                        <p className="font-heading text-foreground font-bold">
-                          {person.name}
-                        </p>
-                        <p className="text-muted-foreground text-sm">
-                          {person.role}
-                        </p>
-                      </div>
-                    </div>
-
-                    <p className="text-muted-foreground flex-1 leading-relaxed italic">
-                      "{person.quote}"
-                    </p>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </motion.div>
-
-          <div className="pointer-events-none absolute left-0 top-0 h-full w-20 bg-gradient-to-r from-background to-transparent" />
-          <div className="pointer-events-none absolute right-0 top-0 h-full w-20 bg-gradient-to-l from-background to-transparent" />
-        </div>
-      </div>
-    </section>
-  );
 };
 
 const QuoteSection = () => {
